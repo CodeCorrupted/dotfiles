@@ -1,32 +1,36 @@
 # Archivo de configuración de Kitty
 
-[Kitty][1] es un emulador de terminal hecho para ser usado principalmente por teclado. Ahora, te explicaré lo que necesitas para que este archivo de configuración funcione correctamente en tu sistema.
+[Kitty][1] es un emulador de terminal hecho para ser usado principalmente
+ por teclado. Ahora, te explicaré lo que necesitas para que este archivo
+ de configuración funcione correctamente en tu sistema.
 
-Este archivo se hizo en Artix Linux, así que es probable que no funcione apropiadamente en otras distribuciones.
+Este archivo se hizo en Artix Linux, así que es probable que no funcione
+ apropiadamente en otras distribuciones (aunque eso no debería afectar).
 
-[1]: https://sw.kovidgoyal.net/kitty/quickstart/
+## Instalación
 
-# Instalación
-
-Además de copiar estos archivos en tu directorio `$HOME/.config/kitty/`, necesitas instalar:
+Además de copiar estos archivos en tu directorio `$HOME/.config/kitty/`,
+ necesitas instalar:
 
 - [JetBrains Mono Nerd Fonts][2].
 - [Imagemagick][3].
-
-[2]: https://github.com/ryanoasis/nerd-fonts
-[3]: https://imagemagick.org/index.php
+- [Pywal][4].
 
 Imagemagick es muy importante para poder visualizar imágenes por la terminal.
 
-# Características
+Pywal se usa para definir el esquema de colores de la terminal.
 
-No he cambiado muchas cosas de la configuración por defecto. Aqui la lista de los cambios realizados:
+## Características
+
+No he cambiado muchas cosas de la configuración que viene por defecto.
+ Aqui la lista de los cambios realizados:
 
 - Cambiar las fuentes por defecto por las de JetBrains Mono Nerd Fonts.
 - Cambiar el color del cursor de la terminal.
 - Esconder el cursor del mouse al teclear.
 - La forma de ver los links.
-- Un ícono de campana compatible con JetBrains Mono Nerd Fonts (por si quieres verla cuando actives la decoración de ventanas).
+- Un ícono de campana compatible con JetBrains Mono Nerd Fonts
+ (por si quieres verla cuando actives la decoración de ventanas).
 - Layout Tall (distribución de la división de ventanas en la terminal).
 - Transparencia de un %70 del texto en ventanas inactivas.
 - Esconder la decoración de ventanas.
@@ -37,3 +41,8 @@ No he cambiado muchas cosas de la configuración por defecto. Aqui la lista de l
   - Ctrl + minus: disminuye el tamaño de la fuente.
   - Ctrl + backspace: reinicia el tamaño de la fuente.
 - Esquema de colores.
+
+[1]: https://sw.kovidgoyal.net/kitty/quickstart/
+[2]: https://github.com/ryanoasis/nerd-fonts
+[3]: https://imagemagick.org/index.php
+[4]: https://github.com/dylanaraps/pywal

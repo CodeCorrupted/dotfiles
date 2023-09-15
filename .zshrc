@@ -100,6 +100,9 @@ source $ZSH/oh-my-zsh.sh
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
+# Environment variables modified
+export PAGER='most'
+
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
@@ -118,3 +121,4 @@ alias ls="lsd"
 alias icat="kitty +kitten icat"
 alias lg='lazygit'
 alias config='/usr/bin/git --git-dir=/home/arc/.cfg/ --work-tree=/home/arc'
+alias fm6000='fm6000 -c random -rd ~/Imagenes/ASCII -m 5'

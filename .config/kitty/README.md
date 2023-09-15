@@ -1,24 +1,26 @@
 # Config file of Kitty
 
-[Kitty][1] is a terminal emulator that is meant to be used principally with keyboard. Now, I will explain what you need for this config file works correctly on your system.
+[Kitty][1] is a terminal emulator that is meant to be used principally with
+ keyboard. Now, I will explain what you need to make this config file works
+ correctly on your system.
 
-This file was made on Artix Linux, so it probably won't work fine on another distro of Linux.
+This file was made on Artix Linux, so it probably won't work fine on another
+ distro of Linux (but that shouldn't matter).
 
-[1]: https://sw.kovidgoyal.net/kitty/quickstart/
+## Installation
 
-# Installation
-
-Besides copying this files inside your `$HOME/.config/kitty/` directory, you need to install:
+Besides copying this files inside your `$HOME/.config/kitty/` directory,
+ you need to install:
 
 - [JetBrains Mono Nerd Fonts][2].
 - [Imagemagick][3].
-
-[2]: https://github.com/ryanoasis/nerd-fonts
-[3]: https://imagemagick.org/index.php
+- [Pywal][4].
 
 Imagemagick it's very important to be able to see images on the terminal.
 
-# Features
+Pywal is used to define the colorscheme of kitty.
+
+## Features
 
 I haven't change much the default configuration. Here's a list of changes I've done:
 
@@ -37,3 +39,8 @@ I haven't change much the default configuration. Here's a list of changes I've d
   - Ctrl + minus: decrease the font size.
   - Ctrl + backspace: reset font size.
 - Scheme colors.
+
+[1]: https://sw.kovidgoyal.net/kitty/quickstart/
+[2]: https://github.com/ryanoasis/nerd-fonts
+[3]: https://imagemagick.org/index.php
+[4]: https://github.com/dylanaraps/pywal
