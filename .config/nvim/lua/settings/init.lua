@@ -34,6 +34,7 @@ end
 vim.cmd("colorscheme " .. color_schemes[current_scheme])
 -- vim.cmd("colorscheme terafox")
 
+set.expandtab = true
 set.shiftwidth = 2
 set.tabstop = 2
 

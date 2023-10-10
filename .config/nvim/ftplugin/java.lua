@@ -4,7 +4,7 @@ if not status then
 	return
 end
 
-local home = os.getenv('HOME')
+local home = os.getenv("HOME")
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 -- Use an on_attach function to only map the following keys
@@ -124,9 +124,9 @@ local config = {
 				downloadSources = true,
 			},
 			configuration = {
-        -- See https://github.com/eclipse/eclipse.jdt.ls/wiki/Running-the-JAVA-LS-server-from-the-command-line#initialize-request
-        -- And search for `interface RuntimeOption`
-        -- The `name` is NOT arbitrary, but must match one of the elements from `enum ExecutionEnvironment` in the link above
+				-- See https://github.com/eclipse/eclipse.jdt.ls/wiki/Running-the-JAVA-LS-server-from-the-command-line#initialize-request
+				-- And search for `interface RuntimeOption`
+				-- The `name` is NOT arbitrary, but must match one of the elements from `enum ExecutionEnvironment` in the link above
 				updateBuildConfiguration = "interactive",
 				-- Indicate different runtimes when your project uses more than one version of Java
 				-- runtimes = {
@@ -155,12 +155,14 @@ local config = {
 			},
 			format = {
 				enabled = true,
+				insertSpaces = true,
+				tabSize = 2,
 				settings = {
 					-- Use Google Java style guidelines for formatting
-          -- To use, make sure to download the file from https://github.com/google/styleguide/blob/gh-pages/eclipse-java-google-style.xml
-          -- and place it in the ~/.local/share/eclipse directory
-          url = home .. "/.local/share/eclipse/eclipse-java-google-style.xml",
-          profile = "GoogleStyle",
+					-- To use, make sure to download the file from https://github.com/google/styleguide/blob/gh-pages/eclipse-java-google-style.xml
+					-- and place it in the ~/.local/share/eclipse directory
+					url = home .. "/.local/share/eclipse/eclipse-java-google-style.xml",
+					profile = "GoogleStyle",
 				},
 			},
 		},
@@ -175,12 +177,13 @@ local config = {
 				"java.util.Objects.requireNonNullElse",
 				"org.mockito.Mockito.*",
 			},
-      filteredTypes = {
-        "com.sun.*",
-        "io.micrometer.shaded.*",
-        "java.awt.*",
-        "jdk.*", "sun.*",
-      },
+			filteredTypes = {
+				"com.sun.*",
+				"io.micrometer.shaded.*",
+				"java.awt.*",
+				"jdk.*",
+				"sun.*",
+			},
 		},
 		contentProvider = { preferred = "fernflower" },
 		extendedClientCapabilities = extendedClientCapabilities,
