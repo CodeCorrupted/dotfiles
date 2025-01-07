@@ -1,0 +1,28 @@
+/* Configuration of Iván (Arc) */
+
+/* Option of rofi */
+configuration {
+blur: false;
+display-drun: "Open" ;
+display-window: "Windows:" ;
+drun-display-format: "{name}";
+font: "Hack Nerd Font 13";
+modes: "window,drun,run,ssh";
+show-icons: true;
+icon-theme: "candy-icons";
+yoffset: 15;
+xoffset: -5;
+sidebar-mode: true;
+  timeout {
+      action: "kb-cancel";
+      delay:  0;
+  }
+  filebrowser {
+      directories-first: true;
+      sorting-method:    "name";
+  }
+}
+
+//@theme "/home/arc/.local/share/rofi/themes/rounded-red-dark.rasi"
+//@theme "/home/arc/.local/share/rofi/themes/squared-everforest.rasi"
+@theme "/home/arc/.local/share/rofi/themes/rounded-blue-dark.rasi"
