@@ -7,8 +7,9 @@ run() {
   fi
 }
 
-# Set keyboard layout to es-latam
-run setxkbmap latam
+# Set keyboard layout to es-latam & us, and change between them with alt+shift
+run setxkbmap latam,us
+run setxkbmap -option 'grp:alt_shift_toggle'
 
 # Start picom as daemon
 run picom -b
@@ -36,3 +37,6 @@ run ~/.fehbg
 
 # Start bluetooth applet
 run blueman-applet
+
+# Start process to detect inactivity and lock screen after 30 minutes
+run xautolock -detectsleep -time 30 -locker "i3lock -i ~/Images/Wallpapers/c59db64e-9d28-4839-b809-f7210404be01.png"
