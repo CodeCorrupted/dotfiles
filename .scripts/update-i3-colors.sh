@@ -6,6 +6,7 @@ WALLPAPER="$1"
 # Ruta al archivo de configuración de i3
 I3_CONFIG="$HOME/.config/i3/conf.d/windows_display.conf"
 ROFI_THEME="$HOME/.config/rofi/colors/theme-pywal.rasi"
+DUNST_CONFIG="$HOME/.config/dunst/dunstrc"
 
 # Verificar si se proporciona un fondo de pantalla
 if [ -z "$WALLPAPER" ]; then
@@ -33,8 +34,16 @@ sed -i "s/^    foreground: .*/    foreground:    $FG;/" "$ROFI_THEME"
 sed -i "s/^    selected: .*/    selected:      $IN;/" "$ROFI_THEME"
 sed -i "s/^    border-color: .*/    border-color:  $BORDER;/" "$ROFI_THEME"
 
+# Actualizar colores en Dunst
+sed -i "s/^    background = .*/    background = \"$BG\";/" "$DUNST_CONFIG"
+sed -i "s/^    foreground = .*/    foreground = \"$FG\";/" "$DUNST_CONFIG"
+sed -i "s/^    frame_color = .*/    frame_color = \"$IN\";/" "$DUNST_CONFIG"
+
 # Recargar i3 para aplicar los cambios
 i3-msg reload
 i3-msg restart
+# Recargar Dunst para aplicar los cambios
+pkill dunst
+dunst &
 
 echo "Colores actualizados: fg=$FG, bg=$BG, in=$IN, border=$BORDER"
