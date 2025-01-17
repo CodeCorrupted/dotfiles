@@ -23,6 +23,4 @@ sidebar-mode: true;
   }
 }
 
-//@theme "/home/arc/.local/share/rofi/themes/rounded-red-dark.rasi"
-//@theme "/home/arc/.local/share/rofi/themes/squared-everforest.rasi"
-@theme "/home/arc/.local/share/rofi/themes/rounded-blue-dark.rasi"
+@theme "~/.config/rofi/themes/launcher.rasi"
