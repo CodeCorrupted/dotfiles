@@ -40,3 +40,6 @@ run blueman-applet
 
 # Start process to detect inactivity and lock screen after 30 minutes
 run xautolock -detectsleep -time 30 -locker "i3lock -i ~/Images/Wallpapers/b53428fb-2a6f-4844-b76b-2ba20ce006eb.png"
+
+# Start script to check battery charge. Commment if you don't use a laptop
+run ~/.scripts/battery_check.sh
