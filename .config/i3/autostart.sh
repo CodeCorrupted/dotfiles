@@ -39,4 +39,4 @@ run ~/.fehbg
 run blueman-applet
 
 # Start process to detect inactivity and lock screen after 30 minutes
-run xautolock -detectsleep -time 30 -locker "i3lock -i ~/Images/Wallpapers/c59db64e-9d28-4839-b809-f7210404be01.png"
+run xautolock -detectsleep -time 30 -locker "i3lock -i ~/Images/Wallpapers/b53428fb-2a6f-4844-b76b-2ba20ce006eb.png"
