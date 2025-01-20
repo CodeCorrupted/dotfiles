@@ -10,4 +10,4 @@ fi
 feh --bg-scale "$1"
 
 # Actualizar los colores en i3wm
-~/.scripts/update-i3-colors.sh "$1"
+~/.scripts/update-colors.sh "$1"
