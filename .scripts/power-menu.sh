@@ -80,7 +80,7 @@ $lock)
   if [[ -x '/usr/bin/betterlockscreen' ]]; then
     betterlockscreen -l
   elif [[ -x '/usr/bin/i3lock' ]]; then
-    i3lock --image=$HOME/Images/Wallpapers/01a83c8f-b391-489c-ba4a-7e5043566e25.png
+    i3lock --image=$HOME/Images/LockScreen/74774549_p0.png
   fi
   ;;
 $logout)

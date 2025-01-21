@@ -18,6 +18,10 @@ fi
 # Generar esquema de colores con pywal
 wal -i "$WALLPAPER" -n
 
+# Cambiar a la ruta completa del wallpaper
+WALLPAPER=$(realpath "$1")
+WALLPAPER="${WALLPAPER/$HOME/\$HOME}"
+
 # Función para verificar si un color es claro u oscuro
 is_light() {
   local color="$1"
