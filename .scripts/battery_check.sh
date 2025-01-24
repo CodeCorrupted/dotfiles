@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Nivel mínimo antes de la notificación
-LOW_BATTERY_LEVEL=15
+LOW_BATTERY_LEVEL=20
 
 # Rutas de la información de la batería (ajústalas si es necesario)
 BATTERY_PATH="/sys/class/power_supply/BAT1"
