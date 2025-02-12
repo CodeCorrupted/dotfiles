@@ -118,13 +118,16 @@ source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-export PAGER='most'
+export PAGER=most
+export EDITOR=nvim
+export VISUAL=nvim
 export PATH="$PATH:$HOME/.config/emacs/bin:$HOME/.scripts/"
 
 alias cat="bat"
-alias ls="lsd"
+alias ls="lsd --hyperlink=auto"
 alias icat="kitty +kitten icat"
 alias fastfetch="fastfetch --logo-width 40 --logo-height 23 -l ~/Imágenes/Neofetch/photo_2024-03-02_21-13-20.jpg"
 alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 alias set-wal='~/.scripts/set-wallpaper.sh'
 alias set-lock-wal='~/.scripts/set-lock-wallpaper.sh'
+alias set-font-kitty='kitten choose-fonts'
