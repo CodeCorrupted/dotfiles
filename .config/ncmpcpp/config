@@ -31,7 +31,7 @@ mpd_port = 6600
 #
 ## Needed for tag editor and file operations to work.
 ##
-mpd_music_dir = ~/Musica/
+mpd_music_dir = ~/Music/
 #
 mpd_crossfade_time = 5
 #
@@ -367,7 +367,7 @@ execute_on_song_change = songinfo
 ## Note: You can specify third character which will be used to build 'empty'
 ## part of progressbar.
 ##
-#progressbar_look = =>
+progressbar_look="░▒▓"
 #
 ## Available values: database, playlist.
 ##
@@ -509,7 +509,7 @@ execute_on_song_change = songinfo
 #
 #media_library_sort_by_mtime = no
 #
-#enable_window_title = yes
+enable_window_title = yes
 #
 ##
 ## Note: You can choose default search mode for search engine. Available modes
