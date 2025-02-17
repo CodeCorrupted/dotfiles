@@ -8,8 +8,8 @@ run() {
 }
 
 # Set keyboard layout to es-latam & us, and change between them with alt+shift
-run setxkbmap latam,us
-run setxkbmap -option 'grp:alt_shift_toggle'
+setxkbmap latam,us
+setxkbmap -option 'grp:alt_shift_toggle'
 
 # Start picom as daemon
 run picom -b
