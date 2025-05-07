@@ -28,5 +28,5 @@ bindings = [
 [general]
 live_config_reload = true
 import = [
-    "~/.config/alacritty/themes/themes/dark_pride.toml"
+    "~/.config/alacritty/colors.toml"
 ]

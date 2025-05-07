@@ -1,35 +1,13 @@
-#! /bin/sh
+#!/bin/sh
 
-# This function only executes a program if it's not already running
-run() {
-  if ! pgrep -f "$1"; then
-    "$@" &
-  fi
-}
-
-# Set keyboard layout to es-latam
-setxkbmap latam
-
-# Start picom (transparency and animations for windows)
-run picom -b
-
-# Start the notification daemon
-run dunst
-
-# Start mpd
-run mpd ~/.config/mpd/mpd.conf
-
-# Start script to check battery charge.
-run ~/.scripts/battery_check.sh
+# Start some apps
+~/.config/bspwm/autostart.sh
 
 # Initialize sxhkd for keymaps
 pgrep -x sxhkd > /dev/null || sxhkd &
 
-# Set the wallpapper for bspwm
-xwallpaper --zoom ~/Images/Wallpapers/wallhaven-j5l2wm.png
-
 # Set desktops
-bspc monitor -d I II III IV V VI VII VIII IX X
+bspc monitor -d 1 2 3 4 5 6 7 8 9 10
 
 # Border and gaps of the windows
 bspc config border_width         2

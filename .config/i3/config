@@ -3,6 +3,3 @@ include ~/.config/i3/conf.d/*.conf
 # Main Key (Windows/Super)
 # Configured as variable
 set $mod Mod4
-
-# Load polybar
-exec_always --no-startup-id $HOME/.config/polybar/launch.sh

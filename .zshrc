@@ -122,12 +122,14 @@ export PAGER=most
 export EDITOR=nvim
 export VISUAL=nvim
 export PATH="$PATH:$HOME/.config/emacs/bin:$HOME/.scripts/"
+export MIDI_SERVER=timidity
+export _JAVA_AWT_WM_NONREPARENTING=1
 
 alias cat="bat"
 alias ls="lsd --hyperlink=auto"
 alias icat="kitty +kitten icat"
-alias fastfetch="fastfetch --logo-width 40 --logo-height 23 -l ~/Imágenes/Neofetch/photo_2024-03-02_21-13-20.jpg"
+# alias fastfetch="fastfetch --logo-width 40 --logo-height 23 -l ~/Imágenes/Neofetch/photo_2024-03-02_21-13-20.jpg"
 alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
-alias set-wal='~/.scripts/set-wallpaper.sh'
+alias set-wal='~/.scripts/set_update_wallpapper.sh'
 alias set-lock-wal='~/.scripts/set-lock-wallpaper.sh'
 alias set-font-kitty='kitten choose-fonts'
