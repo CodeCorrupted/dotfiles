@@ -11,6 +11,12 @@ run() {
 setxkbmap latam,us
 setxkbmap -option 'grp:alt_shift_toggle'
 
+# Set the wallpapper for bspwm
+xwallpaper --zoom '/home/arc/Images/Wallpapers/175246a9-f234-4149-80b1-e2bf3995d957.png'
+
+# Run polybar
+run ~/.config/polybar/launch.sh
+
 # Start picom as daemon
 run picom -b
 
@@ -24,22 +30,19 @@ run redshift-gtk
 run udiskie -as
 
 # Start a notification daemon
-run dunst -conf "$HOME/.config/dunst/dunstrc-i3"
+run dunst -conf "$HOME/.config/dunst/dunstrc-bspwm"
 
 # Start mpd with its config file
 run mpd ~/.config/mpd/mpd.conf
 
-# Set wallpapper
-run ~/.fehbg
-
 # Start bluetooth applet
 run blueman-applet
-
-# Start process to detect inactivity and lock screen after 10 minutes
-run xautolock -detectsleep -time 10 -locker "i3lock --image=/home/arc/Images/LockScreen/b53428fb-2a6f-4844-b76b-2ba20ce006eb.png"
 
 # Start script to check battery charge. Commment if you don't use a laptop
 run ~/.scripts/battery_check.sh
 
-# Start script to chek bright level
-run ~/.scripts/bright_status.sh
+# Start process to detect inactivity and lock screen after 10 minutes
+run xautolock -detectsleep -time 10 -locker "betterlockscreen -l blur"
+
+# Fix to run java applications
+wmname LG3D

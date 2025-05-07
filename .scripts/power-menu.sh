@@ -1,89 +1,58 @@
 #!/usr/bin/env bash
 
-# Current Theme
-dir="$HOME/.config/rofi/themes/"
-theme='power-menu'
+set -euo pipefail
 
-# CMDs
-uptime="$(uptime -p | sed -e 's/up //g')"
-host=$(hostname)
+shutdown="  Shutdown"
+reboot="  Reboot"
+lock="  Lock"
+logout="  Logout"
+yes="  Yes"
+no="  No"
 
-# Options
-shutdown=' '
-reboot=' '
-lock=' '
-logout=' '
-yes=' '
-no=' '
+menu="${lock}\n${logout}\n${reboot}\n${shutdown}"
 
-# Rofi CMD
-rofi_cmd() {
-  rofi -dmenu \
-    -p "Uptime: $uptime" \
-    -mesg "Uptime: $uptime" \
-    -theme ${dir}/${theme}.rasi
+dmenu_cmd() {
+  dmenu -i -l 4 -p "Power Menu: " -fn 'Hurmit Nerd Font' -nb '#0f0e1c' -nf '#a6d5d6' -sb '#29779A' -sf '#a6d5d6'
 }
 
-# Confirmation CMD
-confirm_cmd() {
-  rofi -theme-str 'window {location: center; anchor: center; fullscreen: false; width: 350px;}' \
-    -theme-str 'mainbox {children: [ "message", "listview" ];}' \
-    -theme-str 'listview {columns: 2; lines: 1;}' \
-    -theme-str 'element-text {horizontal-align: 0.5;}' \
-    -theme-str 'textbox {horizontal-align: 0.5;}' \
-    -dmenu \
-    -p 'Confirmation' \
-    -mesg 'Are you Sure?' \
-    -theme ${dir}/${theme}.rasi
+confirm() {
+  printf "%b" "${yes}\n${no}" | dmenu -i -l 2 -p "Confirm?"
 }
 
-# Ask for confirmation
-confirm_exit() {
-  echo -e "$yes\n$no" | confirm_cmd
-}
+chosen=$(printf "%b" "$menu" | dmenu_cmd) || exit 0
 
-# Pass variables to rofi dmenu
-run_rofi() {
-  echo -e "$lock\n$logout\n$reboot\n$shutdown" | rofi_cmd
-}
-
-# Execute Command
-run_cmd() {
-  selected="$(confirm_exit)"
-  if [[ "$selected" == "$yes" ]]; then
-    if [[ $1 == '--shutdown' ]]; then
-      loginctl poweroff -i
-    elif [[ $1 == '--reboot' ]]; then
-      loginctl reboot
-    elif [[ $1 == '--logout' ]]; then
-      if [[ "$DESKTOP_SESSION" == 'bspwm' ]]; then
-        bspc quit
-      elif [[ "$DESKTOP_SESSION" == 'i3' ]]; then
-        i3-msg exit
-      fi
-    fi
-  else
-    exit 0
-  fi
-}
-
-# Actions
-chosen="$(run_rofi)"
-case ${chosen} in
-$shutdown)
-  run_cmd --shutdown
+case "$chosen" in
+"$shutdown" | "${shutdown}")
+  action="--shutdown"
   ;;
-$reboot)
-  run_cmd --reboot
+"$reboot" | "${reboot}")
+  action="--reboot"
   ;;
-$lock)
-  if [[ -x '/usr/bin/betterlockscreen' ]]; then
-    betterlockscreen -l
-  elif [[ -x '/usr/bin/i3lock' ]]; then
-    i3lock --image=$HOME/Images/LockScreen/74774549_p0.png
-  fi
+"$logout" | "${logout}")
+  action="--logout"
   ;;
-$logout)
-  run_cmd --logout
+"$lock" | "${lock}")
+  action="--lock"
+  ;;
+*) exit 0 ;;
+esac
+
+if [[ "$action" != "--lock" ]]; then
+  answer=$(confirm) || exit 0
+  [[ "$answer" != "$yes" ]] && exit 0
+fi
+
+case "$action" in
+--shutdown)
+  loginctl poweroff -i
+  ;;
+--reboot)
+  loginctl reboot
+  ;;
+--logout)
+  i3-msg exit
+  ;;
+--lock)
+  i3lock --image=/home/arc/Images/LockScreen/b53428fb-2a6f-4844-b76b-2ba20ce006eb.png
   ;;
 esac

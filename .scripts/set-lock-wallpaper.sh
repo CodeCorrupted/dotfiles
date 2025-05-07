@@ -1,32 +1,72 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-# Verificar si se pasó una imagen como argumento
-if [ -z "$1" ]; then
-  echo "Por favor, proporciona una imagen como argumento."
-  exit 1
-fi
+set -euo pipefail
 
-# Ruta a la imagen proporcionada
-IMAGE_PATH=$(realpath "$1")
+# Files to update
+I3_AUTOSTART="$HOME/.config/i3/autostart.sh"
+I3_BINDS="$HOME/.config/i3/conf.d/bindings.conf"
+POWER_MENU="$HOME/.scripts/power-menu.sh"
 
-# Reemplazar /home/user por $HOME en la ruta de la imagen
-IMAGE_PATH="${IMAGE_PATH/$HOME/\$HOME}"
+# Check wm running
+check_wm() {
+  if pgrep -x i3 >/dev/null; then
+    return 0
+  elif pgrep -x bspwm >/dev/null; then
+    return 1
+  else
+    return 2
+  fi
+}
 
-# Definir el archivo autostart de configuración de i3lock (ajusta esta ruta si es diferente)
-LOCK_SCREEN_AUTORUN="$HOME/.config/i3/autostart.sh"
-sed -i "s|xautolock -detectsleep -time .* -locker .*|xautolock -detectsleep -time 30 -locker \"i3lock --image=$IMAGE_PATH\"|" "$LOCK_SCREEN_AUTORUN"
+# Update config files
+update_config() {
+  sed -i -E "s|$2|$3|" "$1"
+}
 
-# Actualizar el atajo de teclado en el archivo de configuración de i3
-I3_CONFIG="$HOME/.config/i3/conf.d/bindings.conf"
-sed -i "s|--image=.*|--image=$IMAGE_PATH|" "$I3_CONFIG"
+main() {
+  # Validate argument
+  if [ $# -ne 1 ]; then
+    echo "Uso: $0 /path/to/image" >&2
+    exit 1
+  fi
 
-# Actualizar el script power-menu
-SCRIPT_POWER="$HOME/.scripts/power-menu.sh"
-sed -i "s|--image=.*|--image=$IMAGE_PATH|" "$SCRIPT_POWER"
+  # Validate image
+  IMG_PATH=$(realpath "$1")
+  if [ ! -f "$IMG_PATH" ]; then
+    echo "Archivo no encontrado: $IMG_PATH" >&2
+    exit 1
+  fi
 
-# Recargar i3wm
-i3-msg reload
-i3-msg restart
+  # Act depending on which wm is running
+  set +e
+  check_wm
+  wm_code=$?
+  set -e
 
-# Confirmar la actualización
-echo "La imagen de bloqueo y las configuraciones han sido actualizadas correctamente."
+  if [[ $wm_code -eq 0 ]]; then
+    update_config \
+      "$I3_AUTOSTART" \
+      'xautolock -detectsleep -time [0-9]+ -locker .+' \
+      "xautolock -detectsleep -time 10 -locker \"i3lock --image=${IMG_PATH}\""
+
+    update_config \
+      "$I3_BINDS" \
+      '(--image=)[^ ]+' \
+      "\1${IMG_PATH}"
+
+    update_config \
+      "$POWER_MENU" \
+      '(--image=)[^ ]+' \
+      "\1${IMG_PATH}"
+
+    i3-msg reload
+
+  elif [[ $wm_code -eq 1 ]]; then
+    betterlockscreen -u "$IMG_PATH"
+  else
+    echo "Ni i3 ni bspwm detectados. Abortando." >&2
+    exit 1
+  fi
+}
+
+main "$@"
