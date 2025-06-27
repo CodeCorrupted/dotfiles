@@ -128,8 +128,8 @@ export _JAVA_AWT_WM_NONREPARENTING=1
 alias cat="bat"
 alias ls="lsd --hyperlink=auto"
 alias icat="kitty +kitten icat"
-# alias fastfetch="fastfetch --logo-width 40 --logo-height 23 -l ~/Imágenes/Neofetch/photo_2024-03-02_21-13-20.jpg"
 alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 alias set-wal='~/.scripts/set_update_wallpapper.sh'
 alias set-lock-wal='~/.scripts/set-lock-wallpaper.sh'
 alias set-font-kitty='kitten choose-fonts'
+alias create-java-project='~/.scripts/create_project_java.sh'

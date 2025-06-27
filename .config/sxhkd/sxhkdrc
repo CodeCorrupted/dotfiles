@@ -30,10 +30,10 @@ XF86AudioMute
         bash ~/.scripts/volumeControl.sh mute
 
 XF86MonBrightnessUp
-        bash ~/.scripts/brightnessControl.sh up
+        bash ~/.scripts/brightness_control.sh up
 
 XF86MonBrightnessDown
-        bash ~/.scripts/brightnessControl.sh down
+        bash ~/.scripts/brightness_control.sh down
 
 super + Print
         scrot '%Y-%m-%d_%H-%M-%S_screenshot.png' -e 'mv $f ~/Images/Screenshots/'
