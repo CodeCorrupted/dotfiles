@@ -21,13 +21,13 @@ super + {_, shift +}i
         {qutebrowser, vivaldi}
 
 XF86AudioRaiseVolume
-        bash ~/.scripts/volumeControl.sh up
+        bash ~/.scripts/volume_control.sh up
 
 XF86AudioLowerVolume
-        bash ~/.scripts/volumeControl.sh down
+        bash ~/.scripts/volume_control.sh down
 
 XF86AudioMute
-        bash ~/.scripts/volumeControl.sh mute
+        bash ~/.scripts/volume_control.sh mute
 
 XF86MonBrightnessUp
         bash ~/.scripts/brightness_control.sh up
