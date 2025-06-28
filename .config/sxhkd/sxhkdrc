@@ -15,7 +15,7 @@ super + Escape
 	pkill -USR1 -x sxhkd
 
 super + Delete
-        bash ~/.scripts/power-menu-rofi.sh
+        bash ~/.scripts/power_menu_rofi.sh
 
 super + {_, shift +}i
         {qutebrowser, vivaldi}
