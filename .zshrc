@@ -130,6 +130,6 @@ alias ls="lsd --hyperlink=auto"
 alias icat="kitty +kitten icat"
 alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 alias set-wal='~/.scripts/set_update_wallpapper.sh'
-alias set-lock-wal='~/.scripts/set-lock-wallpaper.sh'
+alias set-lock-wal='~/.scripts/set_lock_wallpapper.sh'
 alias set-font-kitty='kitten choose-fonts'
 alias create-java-project='~/.scripts/create_project_java.sh'

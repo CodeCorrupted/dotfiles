@@ -5,7 +5,7 @@ set -euo pipefail
 # Files to update
 I3_AUTOSTART="$HOME/.config/i3/autostart.sh"
 I3_BINDS="$HOME/.config/i3/conf.d/bindings.conf"
-POWER_MENU="$HOME/.scripts/power-menu.sh"
+POWER_MENU="$HOME/.scripts/power_menu_dmenu.sh"
 
 # Check wm running
 check_wm() {

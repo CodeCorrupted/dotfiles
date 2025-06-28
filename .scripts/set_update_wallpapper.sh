@@ -5,7 +5,7 @@ set -euo pipefail
 I3_CONFIG="$HOME/.config/i3/conf.d/windows_display.conf"
 I3_BARCONF="$HOME/.config/i3/conf.d/bar.conf"
 DMENU_CONF="$HOME/.config/i3/conf.d/bindings.conf"
-DMENU_POWERMENU="$HOME/.scripts/power-menu.sh"
+DMENU_POWERMENU="$HOME/.scripts/power_menu_dmenu.sh"
 DUNST_CONF_I3="$HOME/.config/dunst/dunstrc-i3"
 DUNST_CONF_BSPWM="$HOME/.config/dunst/dunstrc-bspwm"
 POLYBAR_COLORS="$HOME/.config/polybar/colors.ini"
