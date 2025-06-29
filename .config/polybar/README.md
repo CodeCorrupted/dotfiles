@@ -2,7 +2,7 @@
 
 This is the configuration for the panel used on bspwm.
 
-[Polybar image](../../assets/screenshots/polybar_sample.png)
+![Polybar image](../../assets/screenshots/polybar_sample.png)
 
 ## Dependencies
 
