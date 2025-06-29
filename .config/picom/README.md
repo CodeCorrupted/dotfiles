@@ -1,9 +1,6 @@
 # Picom
 
-<video controls width="90%">
-  <source src="../../assets/picom_demo.mp4" type="video/mp4">
-  Tu navegador no soporta videos HTML5.
-</video>
+![Video demo](../../assets/videos/picom_demo.mp4)
 
 This configuration sets the transparency, blur and animations used on windows.
 
