@@ -1,6 +1,7 @@
 # Rofi configuration
 
-![Rofi image](./rofi_sample.png)
+![Rofi image](../../assets/screenshots/rofi_sample.png)
+![Power menu image](../../assets/screenshots/power_menu_rofi.png)
 
 This configuration was taken (i think so, i can't remember it) from this [repo](https://github.com/adi1090x/rofi)
 
