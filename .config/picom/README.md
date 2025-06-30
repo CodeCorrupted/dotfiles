@@ -1,5 +1,7 @@
 # Picom
 
+Click to reproduce!
+
 [![Look demo](../../assets/screenshots/picom_preview.png)](../../assets/videos/picom_demo.mp4)
 
 This configuration sets the transparency, blur and animations used on windows.
