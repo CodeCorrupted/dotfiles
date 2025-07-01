@@ -1,0 +1,72 @@
+# i3status configuration file.
+# see "man i3status" for documentation.
+
+# It is important that this file is edited as UTF-8.
+# The following line should contain a sharp s:
+# ß
+# If the above line is not correctly displayed, fix your editor first!
+
+general {
+        colors = true
+        interval = 1
+        output_format = "i3bar"
+        markup = "pango"
+}
+
+order += "disk /"
+order += "disk /home"
+order += "cpu_usage"
+order += "memory"
+order += "volume master"
+order += "read_file BRIGTH"
+order += "battery all"
+order += "tztime local"
+
+battery all {
+        format = "%status %percentage"
+        low_threshold = 25
+        threshold_type = "percentage"
+        status_chr = "󰂋 "
+        status_bat = "󰂂 "
+        status_unk = "󱉝 "
+        status_full = "󱈏 "
+}
+
+disk "/" {
+        format = "/: %avail"
+        threshold_type = "gbytes_avail"
+        low_threshold = 10
+}
+
+disk "/home" {
+        format = "/home: %avail"
+        threshold_type = "gbytes_avail"
+        low_threshold = 10
+}
+
+memory {
+        format = "  %percentage_used"
+        threshold_degraded = "%20"
+        threshold_critical = "%90"
+}
+
+cpu_usage {
+        format = " : %usage"
+        max_threshold = 90
+        format_above_threshold = "Warning: %usage"
+}
+
+tztime local {
+        format = "  %Y-%m-%d   %H:%M"
+}
+
+volume master{
+        device = "pulse"
+        format = " : %volume"
+        format_muted = " "
+}
+
+read_file BRIGTH {
+        format = "󰃠  %content"
+        path = "/tmp/brightness"
+}
