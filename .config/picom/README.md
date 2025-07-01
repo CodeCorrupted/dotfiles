@@ -1,10 +1,8 @@
 # Picom
 
+Click to reproduce!
 
-
-https://github.com/user-attachments/assets/037136dd-ebcb-41e0-a678-54412569153e
-
-
+[![Look demo](../../assets/screenshots/picom_preview.png)](../../assets/videos/picom_demo.mp4)
 
 This configuration sets the transparency, blur and animations used on windows.
 
