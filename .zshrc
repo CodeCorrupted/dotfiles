@@ -121,7 +121,7 @@ source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
 export PAGER=most
 export EDITOR=nvim
 export VISUAL=nvim
-export PATH="$PATH:$HOME/.config/emacs/bin:$HOME/.scripts/"
+export PATH="$PATH:$HOME/.scripts/"
 export MIDI_SERVER=timidity
 export _JAVA_AWT_WM_NONREPARENTING=1
 
@@ -132,4 +132,3 @@ alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 alias set-wal='~/.scripts/set_update_wallpapper.sh'
 alias set-lock-wal='~/.scripts/set_lock_wallpapper.sh'
 alias set-font-kitty='kitten choose-fonts'
-alias create-java-project='~/.scripts/create_project_java.sh'
