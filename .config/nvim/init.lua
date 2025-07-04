@@ -20,9 +20,6 @@ require("format-plugin")
 require("debugger")
 require("dap-ui")
 
--- Tree-sitter settings
-require("treesitter")
-
 -- Telescope
 require("telescope-config")
 
