@@ -17,6 +17,23 @@ vim.opt.rtp:prepend(lazypath)
 vim.g.mapleader = " "
 
 require("lazy").setup({
+  -- Colorscheme
+  {
+    "EdenEast/nightfox.nvim",
+    lazy = false,
+    priority = 1000,
+    opts = {
+      options = {
+        transparent = false,
+        styles = {
+          comments = "italic",
+          keywords = "bold",
+          types = "italic,bold",
+        },
+      },
+    },
+  },
+
   -- Treesitter plugins
   -- Funcionalities based on tree-sitter
   {
@@ -70,9 +87,6 @@ require("lazy").setup({
   {
     "numToStr/Comment.nvim",
     lazy = false,
-    -- opts = {
-    --   pre_hook = require("ts_context_commentstring.integrations.comment_nvim").create_pre_hook(),
-    -- },
     config = function()
       require("Comment").setup({
         pre_hook = require("ts_context_commentstring.integrations.comment_nvim").create_pre_hook(),
@@ -84,17 +98,26 @@ require("lazy").setup({
   {
     "williamboman/mason.nvim",
     lazy = false,
-    config = function()
-      require("mason").setup({
-        ui = {
-          icons = {
-            package_installed = "✓",
-            package_pending = "➜",
-            package_uninstalled = "✗",
-          },
-        },
-      })
-    end,
+    opts = {
+      ui = {
+        icons = {
+          package_installed = "✓",
+          package_pending = "➜",
+          package_uninstalled = "✗",
+        }
+      }
+    },
+    -- config = function()
+    --   require("mason").setup({
+    --     ui = {
+    --       icons = {
+    --         package_installed = "✓",
+    --         package_pending = "➜",
+    --         package_uninstalled = "✗",
+    --       },
+    --     },
+    --   })
+    -- end,
   },
   {
     "williamboman/mason-lspconfig.nvim",
@@ -238,22 +261,7 @@ require("lazy").setup({
   { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
   { "nvim-telescope/telescope-dap.nvim" },
 
-  -- Colorscheme
-  {
-    "EdenEast/nightfox.nvim",
-    config = function()
-      require("nightfox").setup({
-        options = {
-          transparent = false,
-          styles = {
-            comments = "italic",
-            keywords = "bold",
-            types = "italic,bold",
-          },
-        },
-      })
-    end,
-  },
+
   -- Which-key, plugin to manage mappings
   {
     "folke/which-key.nvim",

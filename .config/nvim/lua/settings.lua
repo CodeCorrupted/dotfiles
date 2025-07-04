@@ -1,23 +1,58 @@
 local set = vim.opt
 
 -- List of colorschemes
-local colorschemes = { "duskfox", "nightfox", "nordfox", "terafox", "carbonfox", "dayfox", "dawnfox" }
+local colorschemes = { "nightfox", "dayfox", "dawnfox", "duskfox", "nordfox", "terafox", "carbonfox"}
 
--- Current index of the color scheme
-local current_index = 1
+-- Function to save the selected colorscheme on this file
+local function save_colorscheme(scheme)
+  local config_path = vim.fn.stdpath('config') .. '/lua/settings.lua'
+  local content = ""
+  local file = io.open(config_path, "r")
+
+  if file then
+    content = file:read("*a")
+    file:close()
+  end
+
+  -- Search for and replace the colorscheme line
+  local new_content, count = content:gsub(
+    'vim%.cmd%("colorscheme%s+%w+"%)',
+    'vim.cmd("colorscheme ' .. scheme .. '")'
+  )
+  -- In case that the previous line doesn't exist
+  if count == 0 then
+    new_content = content .. '\n' .. 'vim.cmd("colorscheme ' .. scheme .. '")'
+  end
+
+  -- Write the new content
+  local file = io.open(config_path, "w")
+  if file then
+    file:write(new_content)
+    file:close()
+  end
+end
+
+-- Apply the colorscheme at start
+vim.cmd("colorscheme terafox")
 
 -- Function to cycle through color schemes
 function SwitchColorscheme()
-	current_index = current_index + 1
-	if current_index > #colorschemes then
-		current_index = 1
-	end
-	local colorscheme = colorschemes[current_index]
-	vim.cmd("colorscheme " .. colorscheme)
-	vim.notify("Changed to colorscheme: " .. colorscheme, "info", { title = "Colorscheme Changed" })
-end
+  local current_colorscheme = vim.g.colors_name or "nightfox"
+  local next_index = 1
 
-vim.cmd("colorscheme " .. colorschemes[current_index])
+  -- Find the current index
+  for i, scheme in ipairs(colorschemes) do
+    if scheme == current_colorscheme then
+      next_index = i % #colorschemes + 1
+      break
+    end
+  end
+
+  local next_scheme = colorschemes[next_index]
+  vim.cmd("colorscheme " .. next_scheme)
+  save_colorscheme(next_scheme)
+  vim.notify("Changed to colorscheme: " .. next_scheme, "info", {title = "Colorscheme Changed"})
+end
 
 -- Notify for any other plugin
 vim.notify = require("notify")
