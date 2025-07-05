@@ -1,22 +1,4 @@
--- Bootstrap for lazy.nvim
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not (vim.uv or vim.loop).fs_stat(lazypath) then
-  vim.fn.system({
-    "git",
-    "clone",
-    "--filter=blob:none",
-    "https://github.com/folke/lazy.nvim.git",
-    "--branch=stable", -- latest stable release
-    lazypath,
-  })
-end
-vim.opt.rtp:prepend(lazypath)
-
--- Set Space as mapleader
--- This is the recommended way to do it
-vim.g.mapleader = " "
-
-require("lazy").setup({
+return {
   -- Colorscheme
   {
     "EdenEast/nightfox.nvim",
@@ -32,6 +14,16 @@ require("lazy").setup({
         },
       },
     },
+  },
+
+  -- Greeter
+  {
+    "goolord/alpha-nvim",
+    lazy = false,
+    event = "VimEnter",
+    config = function ()
+      require("plugins.alpha")
+    end
   },
 
   -- Treesitter plugins
@@ -107,17 +99,6 @@ require("lazy").setup({
         }
       }
     },
-    -- config = function()
-    --   require("mason").setup({
-    --     ui = {
-    --       icons = {
-    --         package_installed = "✓",
-    --         package_pending = "➜",
-    --         package_uninstalled = "✗",
-    --       },
-    --     },
-    --   })
-    -- end,
   },
   {
     "williamboman/mason-lspconfig.nvim",
@@ -321,6 +302,4 @@ require("lazy").setup({
   { "chentoast/marks.nvim" },
   -- Previewer for md files
   { "ellisonleao/glow.nvim", config = true, cmd = "Glow" },
-  -- Greeter
-  { "goolord/alpha-nvim" },
-})
+}
