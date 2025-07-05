@@ -17,7 +17,7 @@ vim.opt.rtp:prepend(lazypath)
 vim.g.mapleader = " "
 
 -- Plugins
-require("lazy").setup(require("plugins.init"))
+require("lazy").setup(require("plugins"))
 
 -- Basic settings for Neovim
 require("settings")
