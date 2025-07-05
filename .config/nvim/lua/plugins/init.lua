@@ -21,20 +21,20 @@ return {
     "goolord/alpha-nvim",
     lazy = false,
     event = "VimEnter",
-    config = function ()
+    config = function()
       require("plugins.alpha")
     end
   },
 
   -- Treesitter plugins
-  -- Funcionalities based on tree-sitter
+  -- Features based on tree-sitter
   {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
     -- When the wiki have all the info up-to-date, I'll change this to main.
     branch = "master",
     lazy = false,
-    event = {"BufReadPost", "BufNewFile"},
+    event = { "BufReadPost", "BufNewFile" },
     config = function()
       require("plugins.treesitter")
     end,
@@ -64,36 +64,35 @@ return {
 
   -- LSP Plugins
   {
-    "williamboman/mason.nvim",
-    lazy = false,
-    opts = {
-      ui = {
-        icons = {
-          package_installed = "✓",
-          package_pending = "➜",
-          package_uninstalled = "✗",
-        }
-      }
-    },
-  },
-  {
     "williamboman/mason-lspconfig.nvim",
-    config = function()
-      require("mason-lspconfig").setup({
-        ensure_installed = {
-          "bashls",
-          "clangd",
-          "cssls",
-          "html",
-          "jdtls",
-          "marksman",
-          "pyright",
-          "lua_ls",
-          "ts_ls",
+    dependencies = {
+      {
+        "williamboman/mason.nvim",
+        opts = {
+          ui = {
+            icons = {
+              package_installed = "✓",
+              package_pending = "➜",
+              package_uninstalled = "✗",
+            }
+          }
         },
-        automatic_installation = true,
-      })
-    end,
+      },
+      "neovim/nvim-lspconfig",
+    },
+    opts = {
+      ensure_installed = {
+        "bashls",
+        "cssls",
+        "html",
+        "jdtls",
+        "marksman",
+        "pyright",
+        "lua_ls",
+        "ts_ls",
+      },
+      automatic_installation = true,
+    },
   },
   {
     "jay-babu/mason-nvim-dap.nvim",
@@ -122,7 +121,6 @@ return {
       })
     end,
   },
-  { "neovim/nvim-lspconfig" },
   -- Specific language servers support
   {
     "mfussenegger/nvim-jdtls",

@@ -1,23 +1,14 @@
--- Borders for floating windows
-vim.cmd([[autocmd! ColorScheme * highlight NormalFloat guibg=#1f2335]])
-vim.cmd([[autocmd! ColorScheme * highlight FloatBorder guifg=white guibg=#1f2335]])
+local lspconfig = require("lspconfig")
+local float_style = require("float_style")
 
-local border = {
-	{ "🭽", "FloatBorder" },
-	{ "▔", "FloatBorder" },
-	{ "🭾", "FloatBorder" },
-	{ "▕", "FloatBorder" },
-	{ "🭿", "FloatBorder" },
-	{ "▁", "FloatBorder" },
-	{ "🭼", "FloatBorder" },
-	{ "▏", "FloatBorder" },
-}
+-- Appy color and borders to LSP
+vim.api.nvim_create_autocmd("ColorScheme", {
+  pattern = "*",
+  callback = float_style.setup_colors
+})
 
--- LSP settings (for overriding per client)
-local handlers = {
-	["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = border }),
-	["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = border }),
-}
+float_style.setup_colors()
+float_style.setup_lsp_borders()
 
 -- Add aditional capabilities suported by nvim-cmp
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
@@ -27,7 +18,6 @@ local capabilities = require("cmp_nvim_lsp").default_capabilities()
 -- server attaches to the current buffer
 local on_attach = function(client, bufnr)
 	local bufopts = { noremap = true, silent = true, buffer = bufnr }
-	vim.keymap.set("n", "gD", vim.lsp.buf.declaration, bufopts)
 	vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
 	vim.keymap.set("n", "gD", vim.lsp.buf.declaration, bufopts)
 	vim.keymap.set("n", "K", vim.lsp.buf.hover, bufopts)
@@ -47,7 +37,6 @@ local on_attach = function(client, bufnr)
 	end, bufopts)
 end
 
-local lspconfig = require("lspconfig")
 
 -- Enable some languages servers with the aditional completion capabilities and mappings
 local servers = { "bashls", "clangd", "cssls", "html", "marksman", "pyright", "lua_ls", "ts_ls" }
