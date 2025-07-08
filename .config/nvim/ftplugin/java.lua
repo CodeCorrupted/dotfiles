@@ -15,7 +15,7 @@ if not equinox_launcher then
   error("No se encontró el archivo JAR del launcher de JDTLS")
 end
 
--- Configuration
+-- Configuration file
 local os_config = ({
   linux = "config_linux",
   darwin = "config_mac",
@@ -60,21 +60,47 @@ local on_attach = function(client, bufnr)
   set("v", "<leader>jv", function() jdtls.extract_variable(true) end, bufopts)
   set("v", "<leader>jc", function() jdtls.extract_constant(true) end, bufopts)
   set("v", "<leader>jm", function() jdtls.extract_method(true) end, bufopts)
-  -- set("n", "<leader>jo", "<cmd>lua require'jdtls'.organize_imports()<CR>", bufopts)
-  -- set("n", "<leader>jv", "<cmd>lua require'jdtls'.extract_variable()<CR>", bufopts)
-  -- set("n", "<leader>jc", "<cmd>lua require'jdtls'.extract_constant()<CR>", bufopts)
-  -- set("v", "<leader>jv", "<cmd>lua require'jdtls'.extract_variable(true)<CR>", bufopts)
-  -- set("v", "<leader>jc", "<Esc><cmd>lua require'jdtls'.extract_constant(true)<CR>", bufopts)
-  -- set("v", "<leader>jm", "<Esc><cmd>lua require'jdtls'.extract_method(true)<CR>", bufopts)
   -- Debug adapter
-  -- set("n", "<leader>at", "<cmd>lua require'jdtls'.test_class()<CR>", bufopts)
-  -- set("n", "<leader>am", "<cmd>lua require'jdtls'.test_nearest_method()<CR>", bufopts)
-  set("n", "<leader>at", jdtls.test_class, bufopts)
-  set("n", "<leader>am", jdtls.test_nearest_method, bufopts)
+  set("n", "<leader>dt", jdtls.test_class, bufopts)
+  set("n", "<leader>dm", jdtls.test_nearest_method, bufopts)
   -- Set DAP up
   jdtls.setup_dap({ hotcodereplace = "auto" })
-  jdtls.setup.add_commands()
-  -- require("jdtls.setup").add_commands()
+  require("jdtls.setup").add_commands()
+
+  -- Register on which-key those mappings
+  local wk = require("which-key")
+  wk.register({
+    -- LSP general mappings
+    { "<leader>w", group = "Workspace Actions" },
+    { "<leader>wa", desc = "Add the folder at path of workspace folders" },
+    { "<leader>wr", desc = "Remove the folder at path from workspace folders" },
+    { "<leader>wl", desc = "List workspace folders" },
+    { "<leader>f", desc = "Formats the buffer using the attached LSP" },
+    { "<leader>ca", desc = "Selects a code action available at cursor position" },
+    { "<leader>r", desc = "Renames all references to the symbol under the cursor" },
+    { "<leader>D", desc = "Jumps to the definition of the type of the symbol under the cursor" },
+    { "gd", desc = "Jumps to the definition of the symbol under the cursor" },
+    { "gD", desc = "Jumps to the declaration of the symbol under the cursor" },
+    { "gr", desc = "Lists all the references to the symbol under the cursor" },
+    { "gi", desc = "Lists all the implementations for the symbol under the cursor" },
+    { "K", desc = "Displays information of the symbol under the cursor" },
+    { "<C-k>", desc = "Displays signature information of the symbol under the cursor" },
+    -- Specific jdtls mappings
+    { "<leader>j", group = "Jdtls Mappings" },
+    { "<leader>jo", desc = "Organize imports" },
+    { "<leader>jv", desc = "Extract variable" },
+    { "<leader>jc", desc = "Extract constant" },
+    { "<leader>ju", desc = "Update debug config of jdtls" },
+    -- Debug adpater
+    { "<leader>dt", desc = "Test class" },
+    { "<leader>dm", desc = "Test nearest method" },
+  }, {
+    mode = { "v" },
+    { "<leader>j",  group = "Jdtls" },
+    { "<leader>jc", desc = "Extract constant" },
+    { "<leader>jm", desc = "Extract method" },
+    { "<leader>jv", desc = "Extract variable" },
+  })
 end
 
 -- Extend capabilities
@@ -93,10 +119,6 @@ local function join_path(...)
   local path = table.concat(parts, "/")
   -- Normalize paths (delete double slides)
   path = path:gsub("/+", "/")
-  -- Handle special cases on Windows
-  if vim.fn.has("win32") == 1 then
-    path = path:gsub("/", "\\")
-  end
   return path
 end
 
@@ -112,6 +134,7 @@ local function get_jdtls_bundles()
   return bundles
 end
 
+-- Configuration of nvim-jdtls
 local config = {
   -- The command that starts the language server
   -- See: https://github.com/eclipse/eclipse.jdt.ls#running-from-the-command-line
@@ -129,7 +152,7 @@ local config = {
     "java.base/java.lang=ALL-UNNAMED",
     "-jar", equinox_launcher,
     "-configuration",
-    util.path.join(home, ".local/share/nvim/mason/packages/jdtls", os_config),
+    home .. "/.local/share/nvim/mason/packages/jdtls/config_linux",
     "-data",
     workspace_dir,
   },
@@ -142,7 +165,23 @@ local config = {
   settings = {
     java = {
       eclipse = { downloadSources = true },
-      configuration = { updateBuildConfiguration = "interactive" },
+      configuration = {
+        updateBuildConfiguration = "interactive",
+        runtimes = {
+          {
+            name = "JavaSE-1.8",
+            path = "/usr/lib/jvm/java-8-openjdk/"
+          },
+          {
+            name = "JavaSE-17",
+            path = "/usr/lib/jvm/java-17-openjdk/"
+          },
+          {
+            name = "JavaSE-21",
+            path = "/usr/lib/jvm/java-21-openjdk/"
+          },
+        }
+      },
       maven = { downloadSources = true },
       implementationsCodeLens = { enabled = true },
       referencesCodeLens = { enabled = true },

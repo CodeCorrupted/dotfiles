@@ -124,9 +124,6 @@ return {
   -- Specific language servers support
   {
     "mfussenegger/nvim-jdtls",
-    dependencies = {
-      "mfussenegger/nvim-dap",
-    },
   },
   -- Linter
   { "mfussenegger/nvim-lint" },
@@ -134,35 +131,66 @@ return {
   { "mhartington/formatter.nvim" },
 
   -- DAP plugins
-  { "mfussenegger/nvim-dap-python" },
+  {
+    "mfussenegger/nvim-dap",
+    dependencies = {
+      "rcarriga/nvim-dap-ui",
+      "theHamsta/nvim-dap-virtual-text",
+      "LiadOz/nvim-dap-repl-highlights",
+      "mfussenegger/nvim-dap-python",
+    },
+  },
   {
     "rcarriga/nvim-dap-ui",
     dependencies = { "nvim-neotest/nvim-nio" },
+    -- config = function()
+    --   require("dapui").setup({
+    --     layouts = {
+    --       {
+    --         elements = {
+    --           { id = "scopes", size = 0.25 },
+    --           "breakpoints",
+    --           "stacks",
+    --           "watches",
+    --         },
+    --         size = 40,
+    --         position = "left",
+    --       },
+    --       {
+    --         elements = {
+    --           "repl",
+    --           "console",
+    --         },
+    --         size = 0.25,
+    --         position = "bottom",
+    --       },
+    --     },
+    --   })
+    -- end
   },
   {
     "folke/neodev.nvim",
     opts = {
       library = {
-        plugins = { "nvim-dap-ui" },
+        plugins = { "nvim-dap-ui", "nvim-dap" },
         types = true,
       },
     },
   },
   {
     "theHamsta/nvim-dap-virtual-text",
-    config = function()
-      require("nvim-dap-virtual-text").setup({
-        commented = true,
-        highlight_changed_variables = true,
-        all_frames = true,
-      })
-    end,
+    opts = {
+      commented = true,
+      highlight_changed_variables = true,
+      all_frames = true,
+    },
   },
   {
     "LiadOz/nvim-dap-repl-highlights",
-    config = function()
-      require("nvim-dap-repl-highlights").setup()
-    end,
+    opts = {},
+    -- config = function()
+    --   require("nvim-dap-repl-highlights").setup()
+    -- end,
   },
 
   -- Snippets

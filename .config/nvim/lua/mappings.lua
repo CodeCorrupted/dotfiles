@@ -34,23 +34,6 @@ wk.add({
     { "<leader>e",  group = "Diagnostics" },
     { "<leader>eo", vim.diagnostic.open_float,                        desc = "Open a floating window of the error on current line" },
     { "<leader>es", vim.diagnostic.setloclist,                        desc = "Gives a list of all the errors on current file" },
-    -- LSP mappings
-    { "<leader>w",  group = "LSP workspace" },
-    { "<leader>wa", desc = "Add workspace folder" },
-    { "<leader>wr", desc = "Remove workspace folder" },
-    { "<leader>wl", desc = "List workspace folders" },
-    { "<leader>D",  desc = "Type of definition" },
-    { "<leader>r",  desc = "Rename on buffer" },
-    { "<leader>ca", desc = "Code actions" },
-    { "<leader>f",  desc = "Format" },
-    { "{e",         "<cmd>lua vim.diagnostic.jump({count = -1})<CR>", desc = "Go to previous error" },
-    { "}e",         "<cmd>lua vim.diagnostic.jump({count = -1})<CR>", desc = "Go to next error" },
-    { "gD",         desc = "Go to declaration" },
-    { "gd",         desc = "Go to definition" },
-    { "gr",         desc = "Go to references" },
-    { "gi",         desc = "Go to implementation" },
-    { "K",          desc = "Show ubication of file" },
-    { "<C-k>",      desc = "Signature help" },
     -- Change Colorscheme
     { "<C-c>",      "<cmd>lua SwitchColorscheme()<CR>",               desc = "Change current colorscheme" },
     -- Treesitter mappings
@@ -127,8 +110,6 @@ wk.add({
       end,
       desc = "Step out",
     },
-    { "<leader>dt",  desc = "Test class" },
-    { "<leader>dm",  desc = "Test nearest method" },
     { "<leader>p",   group = "Python" },
     { "<leader>pm",  "<cmd>lua require('dap-python´).test_method()<CR>", desc = "Test method" },
     { "<leader>pc",  "<cmd>lua require('dap-python´).test_class()<CR>",  desc = "Test class" },
@@ -150,12 +131,6 @@ wk.add({
     { "<leader>tds", "<cmd>Telescope dap configurations<CR>",            desc = "DAP configurations" },
     { "<leader>tdv", "<cmd>Telescope dap variables<CR>",                 desc = "Show variables" },
     { ":",           "<cmd>Telescope cmdline<CR>",                       desc = "Run cmdline with Telescope" },
-    -- Jdtls mappings
-    { "<leader>j",   group = "Jdtls" },
-    { "<leader>jo",  desc = "Organize imports" },
-    { "<leader>jc",  desc = "Extract constant" },
-    { "<leader>ju",  "<cmd>JdtUpdateDebugConfig<CR>",                    desc = "Update config of jdtls" },
-    { "<leader>jv",  desc = "Extract variable" },
     -- Gitsigns
     { "<leader>h",   group = "Gitsigns" },
     { "<leader>hb",  desc = "Gitsigns preview blame line" },
@@ -177,10 +152,6 @@ wk.add({
   {
     -- Jdtls
     mode = { "v" },
-    { "<leader>j",  group = "Jdtls" },
-    { "<leader>jc", desc = "Extract constant" },
-    { "<leader>jm", desc = "Extract method" },
-    { "<leader>jv", desc = "Extract variable" },
     -- DAP
     { "<leader>d",  group = "DAP" },
     { "<leader>ds", "<Esc><cmd>lua require('dap-python').debug_selection()<CR>", desc = "Test selection" },
