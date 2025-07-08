@@ -69,7 +69,7 @@ local on_attach = function(client, bufnr)
 
   -- Register on which-key those mappings
   local wk = require("which-key")
-  wk.register({
+  wk.add({
     -- LSP general mappings
     { "<leader>w", group = "Workspace Actions" },
     { "<leader>wa", desc = "Add the folder at path of workspace folders" },
