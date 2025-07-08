@@ -9,9 +9,6 @@ require("formatter").setup({
 		sh = {
 			require("formatter.filetypes.sh").shfmt,
 		},
-		c = {
-			require("formatter.filetypes.c").clangformat,
-		},
 		css = {
 			require("formatter.filetypes.css").prettierd,
 		},
@@ -47,9 +44,6 @@ require("formatter").setup({
 		},
 		python = {
 			require("formatter.filetypes.python").black,
-		},
-		typescript = {
-			require("formatter.filetypes.typescript").prettierd,
 		},
 		["*"] = {
 			require("formatter.filetypes.any").remove_trailing_whitespace,

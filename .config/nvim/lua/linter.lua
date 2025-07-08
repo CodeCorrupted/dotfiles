@@ -3,11 +3,11 @@ local lint = require("lint")
 lint.linters_by_ft = {
 	markdown = { "markdownlint" },
 	bash = { "shellcheck" },
-	c = { "cpplint" },
 	css = { "stylelint" },
 	html = { "djlint" },
 	java = { "checkstyle" },
 	javascript = { "eslint_d" },
+        json = {"jsonlint"},
 	python = { "flake8" },
 	typescript = { "eslint_d" },
 }

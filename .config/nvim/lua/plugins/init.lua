@@ -89,6 +89,7 @@ return {
         "marksman",
         "pyright",
         "lua_ls",
+        "jsonls",
       },
       automatic_installation = true,
     },
@@ -97,7 +98,7 @@ return {
     "jay-babu/mason-nvim-dap.nvim",
     config = function()
       require("mason-nvim-dap").setup({
-        ensure_installed = { "bash", "cpptools", "js", "python", "javatest", "javadbg" },
+        ensure_installed = { "bash", "js", "python", "javatest", "javadbg" },
         automatic_installation = true,
       })
     end,
@@ -114,7 +115,7 @@ return {
           "checkstyle",
           "eslint_d",
           "flake8",
-          "cpplint",
+          "jsonlint"
         },
         automatic_installation = true,
       })

@@ -59,7 +59,7 @@ end
 
 
 -- Enable some languages servers with the aditional completion capabilities and mappings
-local servers = { "bashls", "cssls", "html", "marksman", "lua_ls", "pyright" }
+local servers = { "bashls", "cssls", "html", "jsonls", "marksman", "lua_ls", "pyright" }
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup({
     on_attach = on_attach,
