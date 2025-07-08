@@ -70,36 +70,40 @@ local on_attach = function(client, bufnr)
   -- Register on which-key those mappings
   local wk = require("which-key")
   wk.add({
-    -- LSP general mappings
-    { "<leader>w", group = "Workspace Actions" },
-    { "<leader>wa", desc = "Add the folder at path of workspace folders" },
-    { "<leader>wr", desc = "Remove the folder at path from workspace folders" },
-    { "<leader>wl", desc = "List workspace folders" },
-    { "<leader>f", desc = "Formats the buffer using the attached LSP" },
-    { "<leader>ca", desc = "Selects a code action available at cursor position" },
-    { "<leader>r", desc = "Renames all references to the symbol under the cursor" },
-    { "<leader>D", desc = "Jumps to the definition of the type of the symbol under the cursor" },
-    { "gd", desc = "Jumps to the definition of the symbol under the cursor" },
-    { "gD", desc = "Jumps to the declaration of the symbol under the cursor" },
-    { "gr", desc = "Lists all the references to the symbol under the cursor" },
-    { "gi", desc = "Lists all the implementations for the symbol under the cursor" },
-    { "K", desc = "Displays information of the symbol under the cursor" },
-    { "<C-k>", desc = "Displays signature information of the symbol under the cursor" },
-    -- Specific jdtls mappings
-    { "<leader>j", group = "Jdtls Mappings" },
-    { "<leader>jo", desc = "Organize imports" },
-    { "<leader>jv", desc = "Extract variable" },
-    { "<leader>jc", desc = "Extract constant" },
-    { "<leader>ju", desc = "Update debug config of jdtls" },
-    -- Debug adpater
-    { "<leader>dt", desc = "Test class" },
-    { "<leader>dm", desc = "Test nearest method" },
-  }, {
-    mode = { "v" },
-    { "<leader>j",  group = "Jdtls" },
-    { "<leader>jc", desc = "Extract constant" },
-    { "<leader>jm", desc = "Extract method" },
-    { "<leader>jv", desc = "Extract variable" },
+    {
+      mode = { "n" },
+      -- LSP general mappings
+      { "<leader>w", group = "Workspace Actions" },
+      { "<leader>wa", desc = "Add the folder at path of workspace folders" },
+      { "<leader>wr", desc = "Remove the folder at path from workspace folders" },
+      { "<leader>wl", desc = "List workspace folders" },
+      { "<leader>f", desc = "Formats the buffer using the attached LSP" },
+      { "<leader>ca", desc = "Selects a code action available at cursor position" },
+      { "<leader>r", desc = "Renames all references to the symbol under the cursor" },
+      { "<leader>D", desc = "Jumps to the definition of the type of the symbol under the cursor" },
+      { "gd", desc = "Jumps to the definition of the symbol under the cursor" },
+      { "gD", desc = "Jumps to the declaration of the symbol under the cursor" },
+      { "gr", desc = "Lists all the references to the symbol under the cursor" },
+      { "gi", desc = "Lists all the implementations for the symbol under the cursor" },
+      { "K", desc = "Displays information of the symbol under the cursor" },
+      { "<C-k>", desc = "Displays signature information of the symbol under the cursor" },
+      -- Specific jdtls mappings
+      { "<leader>j", group = "Jdtls Mappings" },
+      { "<leader>jo", desc = "Organize imports" },
+      { "<leader>jv", desc = "Extract variable" },
+      { "<leader>jc", desc = "Extract constant" },
+      { "<leader>ju", desc = "Update debug config of jdtls" },
+      -- Debug adpater
+      { "<leader>dt", desc = "Test class" },
+      { "<leader>dm", desc = "Test nearest method" },
+    },
+    {
+      mode = { "v" },
+      { "<leader>j",  group = "Jdtls" },
+      { "<leader>jc", desc = "Extract constant" },
+      { "<leader>jm", desc = "Extract method" },
+      { "<leader>jv", desc = "Extract variable" },
+    },
   })
 end
 

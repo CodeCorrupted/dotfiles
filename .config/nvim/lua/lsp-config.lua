@@ -1,5 +1,6 @@
 local lspconfig = require("lspconfig")
 local float_style = require("float_style")
+local wk = require("which-key")
 
 -- Appy color and borders to LSP
 vim.api.nvim_create_autocmd("ColorScheme", {
@@ -37,8 +38,8 @@ local on_attach = function(client, bufnr)
     vim.lsp.buf.format({ async = true })
   end, bufopts)
   -- Register on which-key those mappings
-  local wk = require("which-key")
   wk.add({
+    mode = {"n"},
     { "<leader>w",  group = "Workspace Actions" },
     { "<leader>wa", desc = "Add the folder at path of workspace folders" },
     { "<leader>wr", desc = "Remove the folder at path from workspace folders" },
@@ -58,7 +59,7 @@ end
 
 
 -- Enable some languages servers with the aditional completion capabilities and mappings
-local servers = { "bashls", "cssls", "html", "marksman", "pyright" }
+local servers = { "bashls", "cssls", "html", "marksman", "lua_ls", "pyright" }
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup({
     on_attach = on_attach,
@@ -73,7 +74,15 @@ require("typescript-tools").setup({
     local opts = { buffer = bufnr, silent = true }
     vim.keymap.set('n', 'gs', ':TSToolsOrganizeImports<CR>', opts)
     vim.keymap.set('n', 'gR', ':TSToolsRenameFile<CR>', opts)
-    vim.keymap.set('n', 'gi', ':TSToolsAddMissingImports<CR>', opts)
+    vim.keymap.set('n', 'gI', ':TSToolsAddMissingImports<CR>', opts)
+    wk.add({
+      {
+        mode = {"n"},
+        { "gs", desc = "Organize imports" },
+        { "gR", desc = "Rename File" },
+        { "gI", desc = "Add Missing Imports" },
+      }
+    })
   end,
   settings = {
     tsserver_file_preferences = {
@@ -92,7 +101,7 @@ require("typescript-tools").setup({
 })
 
 -- JavaScript configuration
-lspconfig.tsserver.setup({
+lspconfig.ts_ls.setup({
   on_attach = on_attach,
   filetypes = { "javascript" },
   init_options = {
