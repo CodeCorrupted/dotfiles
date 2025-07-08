@@ -152,6 +152,10 @@ wk.add({
   {
     -- Jdtls
     mode = { "v" },
+    { "<leader>j",  group = "Jdtls" },
+    { "<leader>jc", desc = "Extract constant" },
+    { "<leader>jm", desc = "Extract method" },
+    { "<leader>jv", desc = "Extract variable" },
     -- DAP
     { "<leader>d",  group = "DAP" },
     { "<leader>ds", "<Esc><cmd>lua require('dap-python').debug_selection()<CR>", desc = "Test selection" },

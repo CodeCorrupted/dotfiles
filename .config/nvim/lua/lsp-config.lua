@@ -38,30 +38,66 @@ local on_attach = function(client, bufnr)
   end, bufopts)
   -- Register on which-key those mappings
   local wk = require("which-key")
-  wk.register({
-    { "<leader>w", group = "Workspace Actions" },
+  wk.add({
+    { "<leader>w",  group = "Workspace Actions" },
     { "<leader>wa", desc = "Add the folder at path of workspace folders" },
     { "<leader>wr", desc = "Remove the folder at path from workspace folders" },
     { "<leader>wl", desc = "List workspace folders" },
-    { "<leader>f", desc = "Formats the buffer using the attached LSP" },
+    { "<leader>f",  desc = "Formats the buffer using the attached LSP" },
     { "<leader>ca", desc = "Selects a code action available at cursor position" },
-    { "<leader>r", desc = "Renames all references to the symbol under the cursor" },
-    { "<leader>D", desc = "Jumps to the definition of the type of the symbol under the cursor" },
-    { "gd", desc = "Jumps to the definition of the symbol under the cursor" },
-    { "gD", desc = "Jumps to the declaration of the symbol under the cursor" },
-    { "gr", desc = "Lists all the references to the symbol under the cursor" },
-    { "gi", desc = "Lists all the implementations for the symbol under the cursor" },
-    { "K", desc = "Displays information of the symbol under the cursor" },
-    { "<C-k>", desc = "Displays signature information of the symbol under the cursor" },
+    { "<leader>r",  desc = "Renames all references to the symbol under the cursor" },
+    { "<leader>D",  desc = "Jumps to the definition of the type of the symbol under the cursor" },
+    { "gd",         desc = "Jumps to the definition of the symbol under the cursor" },
+    { "gD",         desc = "Jumps to the declaration of the symbol under the cursor" },
+    { "gr",         desc = "Lists all the references to the symbol under the cursor" },
+    { "gi",         desc = "Lists all the implementations for the symbol under the cursor" },
+    { "K",          desc = "Displays information of the symbol under the cursor" },
+    { "<C-k>",      desc = "Displays signature information of the symbol under the cursor" },
   })
 end
 
 
 -- Enable some languages servers with the aditional completion capabilities and mappings
-local servers = { "bashls", "cssls", "html", "marksman", "pyright", "lua_ls", "ts_ls" }
+local servers = { "bashls", "cssls", "html", "marksman", "pyright" }
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup({
     on_attach = on_attach,
     capabilities = capabilities,
   })
 end
+
+-- TypeScript configuration
+require("typescript-tools").setup({
+  on_attach = function(client, bufnr)
+    on_attach(client, bufnr)
+    local opts = { buffer = bufnr, silent = true }
+    vim.keymap.set('n', 'gs', ':TSToolsOrganizeImports<CR>', opts)
+    vim.keymap.set('n', 'gR', ':TSToolsRenameFile<CR>', opts)
+    vim.keymap.set('n', 'gi', ':TSToolsAddMissingImports<CR>', opts)
+  end,
+  settings = {
+    tsserver_file_preferences = {
+      includeInlayParameterNameHints = "all",
+      includeCompletionsForModuleExports = true,
+      includeCompletionsForImportStatements = true,
+    },
+    tsserver_format_options = {
+      insertSpaceAfterCommaDelimiter = true,
+      insertSpaceAfterConstructor = false,
+      semicolons = "insert",
+    },
+    separate_diagnostic_server = true,
+    publish_diagnostic_on = "change",
+  },
+})
+
+-- JavaScript configuration
+lspconfig.tsserver.setup({
+  on_attach = on_attach,
+  filetypes = { "javascript" },
+  init_options = {
+    preferences = {
+      disableSuggestions = true,
+    }
+  }
+})

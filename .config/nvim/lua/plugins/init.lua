@@ -89,7 +89,6 @@ return {
         "marksman",
         "pyright",
         "lua_ls",
-        "ts_ls",
       },
       automatic_installation = true,
     },
@@ -122,8 +121,11 @@ return {
     end,
   },
   -- Specific language servers support
+  { "mfussenegger/nvim-jdtls" },
   {
-    "mfussenegger/nvim-jdtls",
+    "pmizio/typescript-tools.nvim",
+    dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+    opts = {},
   },
   -- Linter
   { "mfussenegger/nvim-lint" },
@@ -143,30 +145,6 @@ return {
   {
     "rcarriga/nvim-dap-ui",
     dependencies = { "nvim-neotest/nvim-nio" },
-    -- config = function()
-    --   require("dapui").setup({
-    --     layouts = {
-    --       {
-    --         elements = {
-    --           { id = "scopes", size = 0.25 },
-    --           "breakpoints",
-    --           "stacks",
-    --           "watches",
-    --         },
-    --         size = 40,
-    --         position = "left",
-    --       },
-    --       {
-    --         elements = {
-    --           "repl",
-    --           "console",
-    --         },
-    --         size = 0.25,
-    --         position = "bottom",
-    --       },
-    --     },
-    --   })
-    -- end
   },
   {
     "folke/neodev.nvim",
