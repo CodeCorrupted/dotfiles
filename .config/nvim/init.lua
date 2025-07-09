@@ -25,9 +25,6 @@ require("settings")
 -- Mappings
 require("mappings")
 
--- Formatter
-require("format-plugin")
-
 -- DAP integration
 require("debugger")
 require("dap-ui")

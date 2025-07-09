@@ -122,7 +122,6 @@ return {
         "shellcheck",
         "stylelint",
         "djlint",
-        "checkstyle",
         "eslint_d",
         "flake8",
         "jsonlint"
@@ -148,7 +147,12 @@ return {
     },
   },
   -- Formatter
-  { "mhartington/formatter.nvim" },
+  {
+    "mhartington/formatter.nvim",
+    config = function ()
+      require("plugins.formatter")
+    end
+  },
 
   -- DAP plugins
   {
