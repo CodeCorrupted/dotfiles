@@ -25,9 +25,6 @@ require("settings")
 -- Mappings
 require("mappings")
 
--- Linter
-require("linter")
-
 -- Formatter
 require("format-plugin")
 

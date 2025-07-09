@@ -108,7 +108,12 @@ return {
     },
   },
   -- Linter
-  { "mfussenegger/nvim-lint" },
+  {
+    "mfussenegger/nvim-lint",
+    config = function ()
+      require("plugins.lint")
+    end
+  },
   {
     "rshkarin/mason-nvim-lint",
     opts = {
