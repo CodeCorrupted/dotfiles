@@ -5,7 +5,6 @@ lint.linters_by_ft = {
   bash = { "shellcheck" },
   css = { "stylelint" },
   html = { "djlint" },
-  java = { "checkstyle" },
   javascript = { "eslint_d" },
   json = { "jsonlint" },
   python = { "flake8" },

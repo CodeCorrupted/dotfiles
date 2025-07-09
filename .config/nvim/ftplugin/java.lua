@@ -1,5 +1,4 @@
 local jdtls = require("jdtls")
-local util = require("lspconfig.util")
 local home = os.getenv("HOME")
 
 -- Get the jdtls JAR from mason
@@ -15,13 +14,6 @@ if not equinox_launcher then
   error("No se encontró el archivo JAR del launcher de JDTLS")
 end
 
--- Configuration file
-local os_config = ({
-  linux = "config_linux",
-  darwin = "config_mac",
-  win = "config_win",
-})[vim.loop.os_uname().sysname:lower()] or "config_linux"
-
 -- If you started neovim within "~/dev/xy/project-1" this would resolve to 'project-1'
 local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
 local workspace_dir = home .. "/.cache/jdtls-workspace/" .. project_name
@@ -31,8 +23,8 @@ local on_attach = function(client, bufnr)
   local set = vim.keymap.set
   local bufopts = { noremap = true, silent = true, buffer = bufnr }
 
-  -- Disable LSP formatting to use formatter.nvim
-  client.server_capabilities.documentFormattingProvider = false
+  -- true: use jdtls formatter
+  client.server_capabilities.documentFormattingProvider = true
 
   -- General bindings
   local lsp_buf = vim.lsp.buf
@@ -184,7 +176,14 @@ local config = {
             name = "JavaSE-21",
             path = "/usr/lib/jvm/java-21-openjdk/"
           },
-        }
+        },
+        compiler = {
+          lint = {
+            nullReference = "error",
+            potentialNullReference = "warning",
+            redundantNullCheck = "warning",
+          },
+        },
       },
       maven = { downloadSources = true },
       implementationsCodeLens = { enabled = true },
@@ -220,6 +219,11 @@ local config = {
         useBlocks = true,
       },
       extendedClientCapabilities = extendedClientCapabilities,
+      errors = {
+        incompleteClasspath = {
+          severity = "warning",
+        }
+      },
     },
   },
   flags = {
