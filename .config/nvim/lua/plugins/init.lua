@@ -78,10 +78,16 @@ return {
           }
         },
       },
+      {
       "neovim/nvim-lspconfig",
+      config = function ()
+        require("plugins.lspconfig")
+      end
+      },
     },
     opts = {
       ensure_installed = {
+        "angularls",
         "bashls",
         "cssls",
         "html",
@@ -96,30 +102,28 @@ return {
   },
   {
     "jay-babu/mason-nvim-dap.nvim",
-    config = function()
-      require("mason-nvim-dap").setup({
-        ensure_installed = { "bash", "js", "python", "javatest", "javadbg" },
-        automatic_installation = true,
-      })
-    end,
+    opts = {
+      ensure_installed = { "bash", "js", "python", "javatest", "javadbg" },
+      automatic_installation = true,
+    },
   },
+  -- Linter
+  { "mfussenegger/nvim-lint" },
   {
     "rshkarin/mason-nvim-lint",
-    config = function()
-      require("mason-nvim-lint").setup({
-        ensure_installed = {
-          "markdownlint",
-          "shellcheck",
-          "stylelint",
-          "djlint",
-          "checkstyle",
-          "eslint_d",
-          "flake8",
-          "jsonlint"
-        },
-        automatic_installation = true,
-      })
-    end,
+    opts = {
+      ensure_installed = {
+        "markdownlint",
+        "shellcheck",
+        "stylelint",
+        "djlint",
+        "checkstyle",
+        "eslint_d",
+        "flake8",
+        "jsonlint"
+      },
+      automatic_installation = true,
+    },
   },
   -- Specific language servers support
   { "mfussenegger/nvim-jdtls" },
@@ -128,8 +132,7 @@ return {
     dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
     opts = {},
   },
-  -- Linter
-  { "mfussenegger/nvim-lint" },
+  { "joeveiga/ng.nvim" },
   -- Formatter
   { "mhartington/formatter.nvim" },
 

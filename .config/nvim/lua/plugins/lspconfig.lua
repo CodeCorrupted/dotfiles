@@ -39,7 +39,7 @@ local on_attach = function(client, bufnr)
   end, bufopts)
   -- Register on which-key those mappings
   wk.add({
-    mode = {"n"},
+    mode = { "n" },
     { "<leader>w",  group = "Workspace Actions" },
     { "<leader>wa", desc = "Add the folder at path of workspace folders" },
     { "<leader>wr", desc = "Remove the folder at path from workspace folders" },
@@ -77,7 +77,7 @@ require("typescript-tools").setup({
     vim.keymap.set('n', 'gI', ':TSToolsAddMissingImports<CR>', opts)
     wk.add({
       {
-        mode = {"n"},
+        mode = { "n" },
         { "gs", desc = "Organize imports" },
         { "gR", desc = "Rename File" },
         { "gI", desc = "Add Missing Imports" },
@@ -109,4 +109,26 @@ lspconfig.ts_ls.setup({
       disableSuggestions = true,
     }
   }
+})
+
+-- Angular configuration
+lspconfig.angularls.setup({
+  on_attach = function(client, bufnr)
+    on_attach(client, bufnr)
+    local opts = { noremap = true, silent = true }
+    local ng = require("ng");
+    vim.keymap.set("n", "<leader>at", ng.goto_template_for_component, opts)
+    vim.keymap.set("n", "<leader>ac", ng.goto_component_with_template_file, opts)
+    vim.keymap.set("n", "<leader>aT", ng.get_template_tcb, opts)
+    wk.add({
+      {
+        mode = {"n"},
+        {"<leader>a", group = "Angular Actions"},
+        {"<leader>at", desc = "Go to template for component"},
+        {"<leader>ac", desc = "Go to component with template file"},
+        {"<leader>aT", desc = "Get template"},
+      }
+    })
+  end,
+  capabilities = capabilities,
 })
