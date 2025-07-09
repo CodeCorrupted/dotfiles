@@ -138,6 +138,15 @@ return {
     opts = {},
   },
   { "joeveiga/ng.nvim" },
+  {
+    "folke/lazydev.nvim",
+    ft = "lua",
+    opts = {
+      library = {
+        { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+      },
+    },
+  },
   -- Formatter
   { "mhartington/formatter.nvim" },
 
@@ -154,15 +163,6 @@ return {
   {
     "rcarriga/nvim-dap-ui",
     dependencies = { "nvim-neotest/nvim-nio" },
-  },
-  {
-    "folke/neodev.nvim",
-    opts = {
-      library = {
-        plugins = { "nvim-dap-ui", "nvim-dap" },
-        types = true,
-      },
-    },
   },
   {
     "theHamsta/nvim-dap-virtual-text",
