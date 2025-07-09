@@ -26,6 +26,13 @@ require("formatter").setup({
     },
     python = {
       require("formatter.filetypes.python").black,
+      function ()
+        return {
+          exe = vim.fn.expand("~/.local/share/nvim/mason/bin/black"),
+          args = { "-q", "-"},
+          stdin = true,
+        }
+      end
     },
     ["*"] = {
       require("formatter.filetypes.any").remove_trailing_whitespace,
