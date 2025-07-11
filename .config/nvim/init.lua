@@ -26,7 +26,7 @@ require("settings")
 require("mappings")
 
 -- DAP integration
-require("debugger")
+-- require("debugger")
 require("dap-ui")
 
 -- Telescope

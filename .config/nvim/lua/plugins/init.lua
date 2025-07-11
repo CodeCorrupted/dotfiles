@@ -160,9 +160,12 @@ return {
     dependencies = {
       "rcarriga/nvim-dap-ui",
       "theHamsta/nvim-dap-virtual-text",
-      "LiadOz/nvim-dap-repl-highlights",
       "mfussenegger/nvim-dap-python",
+      "LiadOz/nvim-dap-repl-highlights",
     },
+    config = function ()
+      require("plugins.dap")
+    end
   },
   {
     "rcarriga/nvim-dap-ui",
@@ -178,10 +181,9 @@ return {
   },
   {
     "LiadOz/nvim-dap-repl-highlights",
-    opts = {},
-    -- config = function()
-    --   require("nvim-dap-repl-highlights").setup()
-    -- end,
+    config = function()
+      require("nvim-dap-repl-highlights").setup()
+    end,
   },
 
   -- Snippets
