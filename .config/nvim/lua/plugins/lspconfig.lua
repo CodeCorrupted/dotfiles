@@ -19,42 +19,31 @@ local capabilities = require("cmp_nvim_lsp").default_capabilities()
 -- This function only map the following keys after the language
 -- server attaches to the current buffer
 local on_attach = function(client, bufnr)
-  local bufopts = { noremap = true, silent = true, buffer = bufnr }
-  vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
-  vim.keymap.set("n", "gD", vim.lsp.buf.declaration, bufopts)
-  vim.keymap.set("n", "K", vim.lsp.buf.hover, bufopts)
-  vim.keymap.set("n", "gi", vim.lsp.buf.implementation, bufopts)
-  vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, bufopts)
-  vim.keymap.set("n", "<leader>wa", vim.lsp.buf.add_workspace_folder, bufopts)
-  vim.keymap.set("n", "<leader>wr", vim.lsp.buf.remove_workspace_folder, bufopts)
-  vim.keymap.set("n", "<leader>wl", function()
-    print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-  end, bufopts)
-  vim.keymap.set("n", "<leader>D", vim.lsp.buf.type_definition, bufopts)
-  vim.keymap.set("n", "<leader>r", vim.lsp.buf.rename, bufopts)
-  vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, bufopts)
-  vim.keymap.set("n", "gr", vim.lsp.buf.references, bufopts)
-  vim.keymap.set("n", "<leader>f", function()
-    vim.lsp.buf.format({ async = true })
-  end, bufopts)
-  -- Register on which-key those mappings
+  -- Register mappings on which-key
+  local lsp_buf = vim.lsp.buf
   wk.add({
-    mode = { "n" },
-    { "<leader>w",  group = "Workspace Actions" },
-    { "<leader>wa", desc = "Add the folder at path of workspace folders" },
-    { "<leader>wr", desc = "Remove the folder at path from workspace folders" },
-    { "<leader>wl", desc = "List workspace folders" },
-    { "<leader>f",  desc = "Formats the buffer using the attached LSP" },
-    { "<leader>ca", desc = "Selects a code action available at cursor position" },
-    { "<leader>r",  desc = "Renames all references to the symbol under the cursor" },
-    { "<leader>D",  desc = "Jumps to the definition of the type of the symbol under the cursor" },
-    { "gd",         desc = "Jumps to the definition of the symbol under the cursor" },
-    { "gD",         desc = "Jumps to the declaration of the symbol under the cursor" },
-    { "gr",         desc = "Lists all the references to the symbol under the cursor" },
-    { "gi",         desc = "Lists all the implementations for the symbol under the cursor" },
-    { "K",          desc = "Displays information of the symbol under the cursor" },
-    { "<C-k>",      desc = "Displays signature information of the symbol under the cursor" },
-  })
+    {
+      mode = { "n" },
+      { "<leader>w", group = "Workspace Actions" },
+      { "<leader>wa", lsp_buf.add_workspace_folder , desc = "Add the folder at path of workspace folders" },
+      { "<leader>wr", lsp_buf.remove_workspace_folder , desc = "Remove the folder at path from workspace folders" },
+      { "<leader>wl", function()
+        print(vim.inspect(lsp_buf.list_workspace_folders()))
+      end, desc = "List workspace folders" },
+      { "<leader>f", function()
+        lsp_buf.format({ async = true })
+      end, desc = "Formats the buffer using the attached LSP" },
+      { "<leader>ca", lsp_buf.code_action, desc = "Selects a code action available at cursor position" },
+      { "<leader>r", lsp_buf.rename, desc = "Renames all references to the symbol under the cursor" },
+      { "<leader>D", lsp_buf.type_definition, desc = "Jumps to the definition of the type of the symbol under the cursor" },
+      { "gd", lsp_buf.definition, desc = "Jumps to the definition of the symbol under the cursor" },
+      { "gD", lsp_buf.declaration, desc = "Jumps to the declaration of the symbol under the cursor" },
+      { "gr", lsp_buf.references, desc = "Lists all the references to the symbol under the cursor" },
+      { "gi", lsp_buf.implementation, desc = "Lists all the implementations for the symbol under the cursor" },
+      { "K", lsp_buf.hover, desc = "Displays information of the symbol under the cursor" },
+      { "<C-k>", lsp_buf.signature_help, desc = "Displays signature information of the symbol under the cursor" },
+    },
+  }, { buffer = bufnr })
 end
 
 
@@ -122,11 +111,11 @@ lspconfig.angularls.setup({
     vim.keymap.set("n", "<leader>aT", ng.get_template_tcb, opts)
     wk.add({
       {
-        mode = {"n"},
-        {"<leader>a", group = "Angular Actions"},
-        {"<leader>at", desc = "Go to template for component"},
-        {"<leader>ac", desc = "Go to component with template file"},
-        {"<leader>aT", desc = "Get template"},
+        mode = { "n" },
+        { "<leader>a",  group = "Angular Actions" },
+        { "<leader>at", desc = "Go to template for component" },
+        { "<leader>ac", desc = "Go to component with template file" },
+        { "<leader>aT", desc = "Get template" },
       }
     })
   end,

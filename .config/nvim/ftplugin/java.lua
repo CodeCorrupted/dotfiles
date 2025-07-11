@@ -19,84 +19,58 @@ local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
 local workspace_dir = home .. "/.cache/jdtls-workspace/" .. project_name
 
 local on_attach = function(client, bufnr)
-  -- here only are going mappings of LSP
-  local set = vim.keymap.set
-  local bufopts = { noremap = true, silent = true, buffer = bufnr }
-
   -- true: use jdtls formatter
   client.server_capabilities.documentFormattingProvider = true
 
-  -- General bindings
+  -- Register on which-key general mappings
   local lsp_buf = vim.lsp.buf
-  set("n", "gD", lsp_buf.declaration, bufopts)
-  set("n", "gd", lsp_buf.definition, bufopts)
-  set("n", "K", lsp_buf.hover, bufopts)
-  set("n", "gi", lsp_buf.implementation, bufopts)
-  set("n", "<C-k>", lsp_buf.signature_help, bufopts)
-  set("n", "<leader>wa", lsp_buf.add_workspace_folder, bufopts)
-  set("n", "<leader>wr", lsp_buf.remove_workspace_folder, bufopts)
-  set("n", "<leader>wl", function()
-    print(vim.inspect(lsp_buf.list_workspace_folders()))
-  end, bufopts)
-  set("n", "<leader>D", lsp_buf.type_definition, bufopts)
-  set("n", "<leader>r", lsp_buf.rename, bufopts)
-  set("n", "<leader>ca", lsp_buf.code_action, bufopts)
-  set("n", "gr", lsp_buf.references, bufopts)
-  set("n", "<leader>f", function()
-    lsp_buf.format({ async = true })
-  end, bufopts)
-  -- Specific mappings of jdtls-nvim
-  set("n", "<leader>jo", jdtls.organize_imports, bufopts)
-  set("n", "<leader>jv", jdtls.extract_variable, bufopts)
-  set("n", "<leader>jc", jdtls.extract_constant, bufopts)
-  set("v", "<leader>jv", function() jdtls.extract_variable(true) end, bufopts)
-  set("v", "<leader>jc", function() jdtls.extract_constant(true) end, bufopts)
-  set("v", "<leader>jm", function() jdtls.extract_method(true) end, bufopts)
-  -- Debug adapter
-  set("n", "<leader>dt", jdtls.test_class, bufopts)
-  set("n", "<leader>dm", jdtls.test_nearest_method, bufopts)
-  -- Set DAP up
-  jdtls.setup_dap({ hotcodereplace = "auto" })
-  require("jdtls.setup").add_commands()
-
-  -- Register on which-key those mappings
   local wk = require("which-key")
   wk.add({
     {
       mode = { "n" },
       -- LSP general mappings
       { "<leader>w", group = "Workspace Actions" },
-      { "<leader>wa", desc = "Add the folder at path of workspace folders" },
-      { "<leader>wr", desc = "Remove the folder at path from workspace folders" },
-      { "<leader>wl", desc = "List workspace folders" },
-      { "<leader>f", desc = "Formats the buffer using the attached LSP" },
-      { "<leader>ca", desc = "Selects a code action available at cursor position" },
-      { "<leader>r", desc = "Renames all references to the symbol under the cursor" },
-      { "<leader>D", desc = "Jumps to the definition of the type of the symbol under the cursor" },
-      { "gd", desc = "Jumps to the definition of the symbol under the cursor" },
-      { "gD", desc = "Jumps to the declaration of the symbol under the cursor" },
-      { "gr", desc = "Lists all the references to the symbol under the cursor" },
-      { "gi", desc = "Lists all the implementations for the symbol under the cursor" },
-      { "K", desc = "Displays information of the symbol under the cursor" },
-      { "<C-k>", desc = "Displays signature information of the symbol under the cursor" },
+      { "<leader>wa", lsp_buf.add_workspace_folder , desc = "Add the folder at path of workspace folders" },
+      { "<leader>wr", lsp_buf.remove_workspace_folder , desc = "Remove the folder at path from workspace folders" },
+      { "<leader>wl", function()
+        print(vim.inspect(lsp_buf.list_workspace_folders()))
+      end, desc = "List workspace folders" },
+      { "<leader>f", function()
+        lsp_buf.format({ async = true })
+      end, desc = "Formats the buffer using the attached LSP" },
+      { "<leader>ca", lsp_buf.code_action, desc = "Selects a code action available at cursor position" },
+      { "<leader>r", lsp_buf.rename, desc = "Renames all references to the symbol under the cursor" },
+      { "<leader>D", lsp_buf.type_definition, desc = "Jumps to the definition of the type of the symbol under the cursor" },
+      { "gd", lsp_buf.definition, desc = "Jumps to the definition of the symbol under the cursor" },
+      { "gD", lsp_buf.declaration, desc = "Jumps to the declaration of the symbol under the cursor" },
+      { "gr", lsp_buf.references, desc = "Lists all the references to the symbol under the cursor" },
+      { "gi", lsp_buf.implementation, desc = "Lists all the implementations for the symbol under the cursor" },
+      { "K", lsp_buf.hover, desc = "Displays information of the symbol under the cursor" },
+      { "<C-k>", lsp_buf.signature_help, desc = "Displays signature information of the symbol under the cursor" },
       -- Specific jdtls mappings
       { "<leader>j", group = "Jdtls Mappings" },
-      { "<leader>jo", desc = "Organize imports" },
-      { "<leader>jv", desc = "Extract variable" },
-      { "<leader>jc", desc = "Extract constant" },
-      { "<leader>ju", desc = "Update debug config of jdtls" },
+      { "<leader>jo", jdtls.organize_imports, desc = "Organize imports" },
+      { "<leader>jv", jdtls.extract_variable, desc = "Extract variable" },
+      { "<leader>jc", jdtls.extract_constant, desc = "Extract constant" },
+      { "<leader>ju", ":JdtUpdateDebugConfig<CR>", desc = "Update debug config of jdtls" },
       -- Debug adpater
-      { "<leader>dt", desc = "Test class" },
-      { "<leader>dm", desc = "Test nearest method" },
+      { "<leader>dt", jdtls.test_class, desc = "Test class" },
+      { "<leader>dm", jdtls.test_nearest_method, desc = "Test nearest method" },
     },
     {
       mode = { "v" },
       { "<leader>j",  group = "Jdtls" },
-      { "<leader>jc", desc = "Extract constant" },
-      { "<leader>jm", desc = "Extract method" },
-      { "<leader>jv", desc = "Extract variable" },
+      { "<leader>jv", function()
+        jdtls.extract_variable()
+      end, desc = "Extract constant" },
+      { "<leader>jc", function()
+        jdtls.extract_constant()
+      end, desc = "Extract method" },
+      { "<leader>jm", function()
+        jdtls.extract_method()
+      end, desc = "Extract variable" },
     },
-  })
+  }, {buffer = bufnr})
 end
 
 -- Extend capabilities
