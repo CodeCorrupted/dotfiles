@@ -170,6 +170,9 @@ return {
   {
     "rcarriga/nvim-dap-ui",
     dependencies = { "nvim-neotest/nvim-nio" },
+    config = function ()
+      require("plugins.dap-ui")
+    end
   },
   {
     "theHamsta/nvim-dap-virtual-text",
@@ -177,13 +180,12 @@ return {
       commented = true,
       highlight_changed_variables = true,
       all_frames = true,
+      virtual_text_pos = 'inline',
     },
   },
   {
     "LiadOz/nvim-dap-repl-highlights",
-    config = function()
-      require("nvim-dap-repl-highlights").setup()
-    end,
+    opts = {},
   },
 
   -- Snippets
