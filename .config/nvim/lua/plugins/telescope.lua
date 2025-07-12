@@ -1,4 +1,4 @@
--- some code to not see binaries
+-- Script to not show preview for binaries
 local previewers = require("telescope.previewers")
 local Job = require("plenary.job")
 local new_maker = function(filepath, bufnr, opts)
@@ -71,6 +71,9 @@ require("telescope").setup({
           width = 120,
           height = 25,
         },
+      },
+      overseer = {
+        enabled = true,
       },
     },
     mappings = {

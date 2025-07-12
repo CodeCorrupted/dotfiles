@@ -64,7 +64,7 @@ wk.add({
     { "<leader>tdl", "<cmd>Telescope dap list_breakpoints<CR>",          desc = "List of breakpoints" },
     { "<leader>tds", "<cmd>Telescope dap configurations<CR>",            desc = "DAP configurations" },
     { "<leader>tdv", "<cmd>Telescope dap variables<CR>",                 desc = "Show variables" },
-    { ":",           "<cmd>Telescope cmdline<CR>",                       desc = "Run cmdline with Telescope" },
+    { "Q",           "<cmd>Telescope cmdline<CR>",                       desc = "Run cmdline with Telescope" },
     -- Gitsigns
     { "<leader>h",   group = "Gitsigns" },
     { "<leader>hb",  desc = "Gitsigns preview blame line" },

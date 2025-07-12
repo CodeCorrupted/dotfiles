@@ -25,9 +25,6 @@ require("settings")
 -- Mappings
 require("mappings")
 
--- Telescope
-require("telescope-config")
-
 -- Buffer & Tabs improvement
 require("buffers-tabs")
 

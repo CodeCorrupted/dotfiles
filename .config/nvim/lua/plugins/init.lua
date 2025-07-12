@@ -215,7 +215,7 @@ return {
       "ray-x/cmp-treesitter",
       "lukas-reineke/cmp-under-comparator",
     },
-    config = function ()
+    config = function()
       require("plugins.cmp")
     end
   },
@@ -235,15 +235,17 @@ return {
     branch = "0.1.x",
     dependencies = {
       "nvim-lua/plenary.nvim",
-      "nvim-telescope/telescope-media-files.nvim",
-      "nvim-lua/popup.nvim",
-      "nvim-telescope/telescope-ui-select.nvim",
       "nvim-tree/nvim-web-devicons",
+      "nvim-telescope/telescope-media-files.nvim",
+      "nvim-telescope/telescope-ui-select.nvim",
       "gbrlsnchs/telescope-lsp-handlers.nvim",
       "nvim-telescope/telescope-file-browser.nvim",
       "benfowler/telescope-luasnip.nvim",
       "jonarrien/telescope-cmdline.nvim",
     },
+    config = function ()
+      require("plugins.telescope")
+    end
   },
   { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
   { "nvim-telescope/telescope-dap.nvim" },
