@@ -28,9 +28,6 @@ require("mappings")
 -- Telescope
 require("telescope-config")
 
--- Autopairs
-require("pairs")
-
 -- Auto-Completion
 require("completion")
 

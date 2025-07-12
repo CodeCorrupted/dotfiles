@@ -79,10 +79,10 @@ return {
         },
       },
       {
-      "neovim/nvim-lspconfig",
-      config = function ()
-        require("plugins.lspconfig")
-      end
+        "neovim/nvim-lspconfig",
+        config = function()
+          require("plugins.lspconfig")
+        end
       },
     },
     opts = {
@@ -110,7 +110,7 @@ return {
   -- Linter
   {
     "mfussenegger/nvim-lint",
-    config = function ()
+    config = function()
       require("plugins.lint")
     end
   },
@@ -149,7 +149,7 @@ return {
   -- Formatter
   {
     "mhartington/formatter.nvim",
-    config = function ()
+    config = function()
       require("plugins.formatter")
     end
   },
@@ -163,14 +163,14 @@ return {
       "mfussenegger/nvim-dap-python",
       "LiadOz/nvim-dap-repl-highlights",
     },
-    config = function ()
+    config = function()
       require("plugins.dap")
     end
   },
   {
     "rcarriga/nvim-dap-ui",
     dependencies = { "nvim-neotest/nvim-nio" },
-    config = function ()
+    config = function()
       require("plugins.dap-ui")
     end
   },
@@ -192,24 +192,29 @@ return {
   {
     "L3MON4D3/LuaSnip",
     dependencies = { "rafamadriz/friendly-snippets" },
-    varsion = "v2.3",
+    version = "v2.*",
     build = "make install_jsregexp",
+    config = function()
+      require("luasnip.loaders.from_vscode").lazy_load()
+    end
   },
 
   -- Completion plugins
   {
     "hrsh7th/nvim-cmp",
     event = { "InsertEnter", "CmdlineEnter" },
+    dependencies = {
+      "onsails/lspkind.nvim",
+      "saadparwaiz1/cmp_luasnip",
+      "hrsh7th/cmp-nvim-lsp",
+      "hrsh7th/cmp-buffer",
+      "hrsh7th/cmp-path",
+      "hrsh7th/cmp-cmdline",
+      "hrsh7th/cmp-nvim-lua",
+      "ray-x/cmp-treesitter",
+      "lukas-reineke/cmp-under-comparator",
+    },
   },
-  { "onsails/lspkind.nvim" },
-  { "saadparwaiz1/cmp_luasnip" },
-  { "hrsh7th/cmp-nvim-lsp" },
-  { "hrsh7th/cmp-buffer" },
-  { "hrsh7th/cmp-path" },
-  { "hrsh7th/cmp-cmdline" },
-  { "hrsh7th/cmp-nvim-lua" },
-  { "ray-x/cmp-treesitter" },
-  { "lukas-reineke/cmp-under-comparator" },
   {
     "windwp/nvim-autopairs",
     event = "InsertEnter",
