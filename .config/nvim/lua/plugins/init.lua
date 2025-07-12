@@ -207,13 +207,17 @@ return {
       "onsails/lspkind.nvim",
       "saadparwaiz1/cmp_luasnip",
       "hrsh7th/cmp-nvim-lsp",
+      "hrsh7th/cmp-nvim-lsp-signature-help",
       "hrsh7th/cmp-buffer",
-      "hrsh7th/cmp-path",
+      "FelipeLema/cmp-async-path",
       "hrsh7th/cmp-cmdline",
       "hrsh7th/cmp-nvim-lua",
       "ray-x/cmp-treesitter",
       "lukas-reineke/cmp-under-comparator",
     },
+    config = function ()
+      require("plugins.cmp")
+    end
   },
   {
     "windwp/nvim-autopairs",

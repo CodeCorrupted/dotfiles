@@ -28,9 +28,6 @@ require("mappings")
 -- Telescope
 require("telescope-config")
 
--- Auto-Completion
-require("completion")
-
 -- Buffer & Tabs improvement
 require("buffers-tabs")
 
