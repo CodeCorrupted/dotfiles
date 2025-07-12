@@ -243,7 +243,7 @@ return {
       "benfowler/telescope-luasnip.nvim",
       "jonarrien/telescope-cmdline.nvim",
     },
-    config = function ()
+    config = function()
       require("plugins.telescope")
     end
   },
@@ -266,7 +266,25 @@ return {
     },
   },
   -- Bufferline,GUI improvement for buffers and tabs
-  { "akinsho/bufferline.nvim",  version = "*" },
+  {
+    "akinsho/bufferline.nvim",
+    version = "*",
+    config = function()
+      local bufferline = require("bufferline")
+      bufferline.setup({
+        options = {
+          style_preset = require("bufferline").style_preset.minimal,
+          themeable = true,
+          numbers = "ordinal",
+          indicator = {
+            style = "underline",
+          },
+          separator_style = "slant",
+          sort_by = "insert_at_end",
+        },
+      })
+    end,
+  },
   -- Notification manager
   {
     "rcarriga/nvim-notify",

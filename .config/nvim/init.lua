@@ -25,9 +25,6 @@ require("settings")
 -- Mappings
 require("mappings")
 
--- Buffer & Tabs improvement
-require("buffers-tabs")
-
 -- Fast git decorations
 require("git")
 
