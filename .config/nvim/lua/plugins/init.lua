@@ -267,23 +267,17 @@ return {
   },
   -- Bufferline,GUI improvement for buffers and tabs
   {
-    "akinsho/bufferline.nvim",
-    version = "*",
-    config = function()
-      local bufferline = require("bufferline")
-      bufferline.setup({
-        options = {
-          style_preset = require("bufferline").style_preset.minimal,
-          themeable = true,
-          numbers = "ordinal",
-          indicator = {
-            style = "underline",
-          },
-          separator_style = "slant",
-          sort_by = "insert_at_end",
-        },
-      })
+    "romgrk/barbar.nvim",
+    dependencies = {
+      "lewis6991/gitsigns.nvim"
+    },
+    init = function ()
+      vim.g.barbar_auto_setup = false
     end,
+    config = function ()
+      require("plugins.barbar")
+    end,
+    version = '^1.0.0',
   },
   -- Notification manager
   {

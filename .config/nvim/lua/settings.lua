@@ -1,7 +1,7 @@
 local set = vim.opt
 
 -- List of colorschemes
-local colorschemes = { "nightfox", "dayfox", "dawnfox", "duskfox", "nordfox", "terafox", "carbonfox"}
+local colorschemes = { "nightfox", "dayfox", "dawnfox", "duskfox", "nordfox", "terafox", "carbonfox" }
 
 -- Function to save the selected colorscheme on this file
 local function save_colorscheme(scheme)
@@ -51,7 +51,7 @@ function SwitchColorscheme()
   local next_scheme = colorschemes[next_index]
   vim.cmd("colorscheme " .. next_scheme)
   save_colorscheme(next_scheme)
-  vim.notify("Changed to colorscheme: " .. next_scheme, "info", {title = "Colorscheme Changed"})
+  vim.notify("Changed to colorscheme: " .. next_scheme, "info", { title = "Colorscheme Changed" })
 end
 
 -- Notify for any other plugin
@@ -84,11 +84,11 @@ vim.o.updatetime = 250
 
 -- Diagnostics customization
 vim.diagnostic.config({
-	virtual_text = true,
-	signs = true,
-	underline = true,
-	update_in_insert = true,
-	severity_sort = true,
+  virtual_text = true,
+  signs = true,
+  underline = true,
+  update_in_insert = true,
+  severity_sort = true,
 })
 
 -- Autosave on Neovim
