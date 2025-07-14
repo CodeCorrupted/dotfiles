@@ -89,25 +89,11 @@ dap.configurations.typescript = dap.configurations.javascript
 dap.configurations.javascriptreact = dap.configurations.javascript
 dap.configurations.typescriptreact = dap.configurations.javascript
 
--- DAP-UI setup
-local dapui = require("dapui")
-
 -- Icons for DAP
 vim.fn.sign_define("DapBreakpoint", { text = "", texthl = "DiagnosticError", linehl = "", numhl = "" })
 vim.fn.sign_define("DapBreakpointCondition", { text = "", texthl = "DiagnosticWarn", linehl = "", numhl = "" })
 vim.fn.sign_define("DapLogPoint", { text = "", texthl = "DiagnosticInfo", linehl = "", numhl = "" })
 vim.fn.sign_define("DapStopped", { text = "", texthl = "DiagnosticOk", linehl = "", numhl = "" })
-
--- Open/Close DAP-UI
-dap.listeners.after.event_initialized["dapui_config"] = function()
-  dapui.open()
-end
-dap.listeners.before.event_terminated["dapui_config"] = function()
-  dapui.close()
-end
-dap.listeners.before.event_exited["dapui_config"] = function()
-  dapui.close()
-end
 
 -- Add mappings to supported filetypes
 vim.api.nvim_create_augroup("DAPMappings", { clear = true })
