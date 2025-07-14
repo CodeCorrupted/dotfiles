@@ -25,9 +25,6 @@ require("settings")
 -- Mappings
 require("mappings")
 
--- Fast git decorations
-require("git")
-
 -- Status bar and its colors
 require("bar")
 

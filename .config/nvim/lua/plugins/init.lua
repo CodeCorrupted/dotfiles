@@ -171,7 +171,7 @@ return {
     "rcarriga/nvim-dap-ui",
     dependencies = { "nvim-neotest/nvim-nio" },
     config = function()
-      require("plugins.dap-ui")
+      require("plugins.dap_ui")
     end
   },
   {
@@ -265,11 +265,16 @@ return {
       },
     },
   },
-  -- Bufferline,GUI improvement for buffers and tabs
+  -- Barbar, a tabline improvement
   {
     "romgrk/barbar.nvim",
     dependencies = {
-      "lewis6991/gitsigns.nvim"
+      {
+        "lewis6991/gitsigns.nvim",
+        config = function ()
+          require("plugins.gitsigns")
+        end
+      },
     },
     init = function ()
       vim.g.barbar_auto_setup = false
@@ -288,8 +293,6 @@ return {
       })
     end,
   },
-  -- Git decorations
-  { "lewis6991/gitsigns.nvim" },
   -- Feline, status bar
   { "freddiehaddad/feline.nvim" },
   -- Leap, a motion improvement for neovim
