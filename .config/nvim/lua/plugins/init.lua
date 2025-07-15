@@ -271,15 +271,15 @@ return {
     dependencies = {
       {
         "lewis6991/gitsigns.nvim",
-        config = function ()
+        config = function()
           require("plugins.gitsigns")
         end
       },
     },
-    init = function ()
+    init = function()
       vim.g.barbar_auto_setup = false
     end,
-    config = function ()
+    config = function()
       require("plugins.barbar")
     end,
     version = '^1.0.0',
@@ -304,6 +304,13 @@ return {
     "ggandor/leap.nvim",
     config = function()
       require("leap").add_default_mappings()
+      require('leap').opts.preview_filter =
+          function(ch0, ch1, ch2)
+            return not (
+              ch1:match('%s') or
+              ch0:match('%a') and ch1:match('%a') and ch2:match('%a')
+            )
+          end
     end,
     dependencies = {
       "tpope/vim-repeat", -- for dot repeat
