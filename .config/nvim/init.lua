@@ -25,8 +25,5 @@ require("settings")
 -- Mappings
 require("mappings")
 
--- Status bar and its colors
-require("bar")
-
 -- Terminal
 require("terminal")

@@ -51,7 +51,7 @@ function SwitchColorscheme()
   local next_scheme = colorschemes[next_index]
   vim.cmd("colorscheme " .. next_scheme)
   save_colorscheme(next_scheme)
-  vim.notify("Changed to colorscheme: " .. next_scheme, "info", { title = "Colorscheme Changed" })
+  vim.notify("Changed to colorscheme: " .. next_scheme, 2, { title = "Colorscheme Changed" })
 end
 
 -- Notify for any other plugin

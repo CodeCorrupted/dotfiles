@@ -289,12 +289,16 @@ return {
     "rcarriga/nvim-notify",
     config = function()
       require("notify").setup({
+        render = "compact",
         stages = "slide",
       })
     end,
   },
   -- Feline, status bar
-  { "freddiehaddad/feline.nvim" },
+  {
+    "nvim-lualine/lualine.nvim",
+    opts = true,
+  },
   -- Leap, a motion improvement for neovim
   {
     "ggandor/leap.nvim",
