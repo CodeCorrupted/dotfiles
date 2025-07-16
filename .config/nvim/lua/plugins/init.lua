@@ -335,7 +335,11 @@ return {
     config = true,
   },
   -- Improvement to vim marks
-  { "chentoast/marks.nvim" },
+  {
+    "chentoast/marks.nvim",
+    event = "VeryLazy",
+    opts = {},
+  },
   -- Previewer for md files
   { "ellisonleao/glow.nvim", config = true, cmd = "Glow" },
 }
