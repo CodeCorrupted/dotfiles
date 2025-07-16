@@ -332,9 +332,7 @@ return {
   -- Clipboard
   {
     "AckslD/nvim-neoclip.lua",
-    config = function()
-      require("neoclip").setup()
-    end,
+    config = true,
   },
   -- Improvement to vim marks
   { "chentoast/marks.nvim" },
