@@ -340,6 +340,13 @@ return {
     event = "VeryLazy",
     opts = {},
   },
+  -- Improvement to session management
+  {
+    "folke/persistence.nvim",
+    event = "BufReadPre", -- this will only start session saving when an actual file was opened
+    opts = {
+    }
+  },
   -- Previewer for md files
   { "ellisonleao/glow.nvim", config = true, cmd = "Glow" },
 }
