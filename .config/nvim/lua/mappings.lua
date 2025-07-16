@@ -68,3 +68,12 @@ wk.add({
     { "<leader>g",   "<cmd>Glow<CR>",                                    desc = "Preview current md file" },
   },
 })
+
+-- Terminal mappings
+function _G.set_terminal_keymaps()
+  local opts = { noremap = true }
+  vim.api.nvim_buf_set_keymap(0, "t", "<esc>", [[<C-\><C-n>]], opts)
+end
+
+-- if you only want these mappings for toggle term use term://*toggleterm#* instead
+vim.cmd("autocmd! TermOpen term://* lua set_terminal_keymaps()")

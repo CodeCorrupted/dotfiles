@@ -24,6 +24,3 @@ require("settings")
 
 -- Mappings
 require("mappings")
-
--- Terminal
-require("terminal")

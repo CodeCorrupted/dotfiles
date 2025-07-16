@@ -322,7 +322,11 @@ return {
     version = "*",
     opts = {
       open_mapping = [[<A-t>]],
-      direction = "tab",
+      direction = "float",
+      float_opts = {
+        border = "curved",
+        title_pos = "center",
+      },
     },
   },
   -- Clipboard
