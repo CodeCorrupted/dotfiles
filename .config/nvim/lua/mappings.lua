@@ -3,14 +3,6 @@ local wk = require("which-key")
 wk.add({
   {
     mode = { "n" },
-    -- Window mappings
-    { "<C-Up>",     "<cmd>resize +2<CR>",          desc = "Add 2pts to horizontal window" },
-    { "<C-Down>",   "<cmd>resize -2<CR>",          desc = "Substract 2pts to horizontal window" },
-    { "<C-Right>",  "<cmd>vertical resize +2<CR>", desc = "Add 2pts to vertical window" },
-    { "<C-Left>",   "<cmd>vertical resize -2<CR>", desc = "Substract 2pts to vertical window" },
-    { "<leader>s",  group = "Split" },
-    { "<leader>sh", "<cmd>split<CR>",              desc = "Horizontal split window" },
-    { "<leader>sv", "<cmd>vsplit<CR>",             desc = "Vertical split window" },
     -- Buffer mappings
     { "<A-,>", "<cmd>BufferPrevious<CR>", desc = "Go to previous buffer" },
     { "<A-.>", "<cmd>BufferNext<CR>", desc = "Go to next buffer" },
@@ -53,10 +45,9 @@ wk.add({
       desc = "Go to the top of the function on spec",
       group = "Treesitter",
     },
+    { "<leader>l",   "<cmd>Twilight<CR>",                                desc = "Focus on spec with treesitter" },
     -- Terminal on Neovim
     { "<A-t>",     desc = "Open a Terminal" },
-    -- Twilight
-    { "<leader>l",   "<cmd>Twilight<CR>",                                desc = "Focus on spec with treesitter" },
     -- Telescope
     { "<leader>t",   group = "Telescope" },
     { "<leader>tb",  "<cmd>Telescope file_browser<CR>",                  desc = "File browser" },
@@ -75,16 +66,5 @@ wk.add({
     { "Q",           "<cmd>Telescope cmdline<CR>",                       desc = "Run cmdline with Telescope" },
     -- Glow
     { "<leader>g",   "<cmd>Glow<CR>",                                    desc = "Preview current md file" },
-  },
-  {
-    -- Jdtls
-    mode = { "v" },
-    { "<leader>j",  group = "Jdtls" },
-    { "<leader>jc", desc = "Extract constant" },
-    { "<leader>jm", desc = "Extract method" },
-    { "<leader>jv", desc = "Extract variable" },
-    -- DAP
-    { "<leader>d",  group = "DAP" },
-    { "<leader>ds", "<Esc><cmd>lua require('dap-python').debug_selection()<CR>", desc = "Test selection" },
   },
 })
