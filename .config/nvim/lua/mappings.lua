@@ -78,8 +78,6 @@ wk.add({
     { "<leader>sd", function()
       require("persistence").stop()
     end, desc = "Stop Persistence (don't save on exit)"},
-    -- Glow
-    { "<leader>g",   "<cmd>Glow<CR>",                           desc = "Preview current md file" },
   },
 })
 

@@ -348,5 +348,10 @@ return {
     }
   },
   -- Previewer for md files
-  { "ellisonleao/glow.nvim", config = true, cmd = "Glow" },
+  {
+    "MeanderingProgrammer/render-markdown.nvim",
+    ft = "markdown",
+    opts = {
+    },
+  },
 }

@@ -1,6 +1,6 @@
 local configs = require("nvim-treesitter.configs")
 configs.setup({
-  ensure_installed = { "angular", "bash", "css", "html", "java", "javascript", "json", "lua", "python", "sql", "typescript" },
+  ensure_installed = { "angular", "bash", "css", "html", "java", "javascript", "json", "markdown", "markdown_inline", "lua", "python", "sql", "typescript" },
   sync_install = true,
   auto_install = true,
   highlight = {

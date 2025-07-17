@@ -113,6 +113,7 @@ cmp.setup({
     },
     { name = "async_path" },
     { name = "treesitter" },
+    { name = "render-markdown" },
   },
 })
 
