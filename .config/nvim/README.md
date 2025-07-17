@@ -1,86 +1,121 @@
-# Neovim
+# Neovim Configuration - Modern Development Environment
 
-This is my configuration of Neovim. Some commits before introducing this file, this
-configuration offered basic support for C and C++. I removed those languages
-because i didn't use them.
+[![Lua](https://img.shields.io/badge/Made%20with%20Lua-blueviolet.svg?style=flat&logo=lua)](https://lua.org)
+[![Neovim](https://img.shields.io/badge/Neovim%20Version-0.10%2B-green.svg?style=flat&logo=neovim)](https://neovim.io)
 
-This configuration supports the following languages:
+Modern Neovim configuration optimized for web development
+(JavaScript/Typescript/Angular) with full Java support. Built for Linux systems
+with extensibility for other platforms.
 
-- Angular
-- Bash
-- CSS
-- HTML
-- Java
-- JavaScript
-- Json
-- TypeScript
-- Markdown
-- Lua
-- Python
+## Features
 
-This configuration was tested only on Linux, so if you're on another system, it
-could not work propperly.
+### Language Support
 
-Also, it have the following features:
+- **Web Development**: Angular, Typescript, JavaScript, HTML, CSS, JSON
+- **Backend & Scripting**: Java, Python, Lua, Bash
+- **Documentation**: Markdown
 
-- Autocompletion.
-- Debugger.
-- Linters.
-- Formatters.
-- Snippets (by Luasnip).
-- File explorer, finder, etc. (Telescope).
-- Clipboard (for things you yank).
-- Enhanced notifications (with notify plugin).
-- Nightfox colorscheme (you can change through all of them with Control+c).
-- Fancy greeter.
-- Motion, Marks and Session enhanced by plugins.
-- Treesitter enhancement.
-- Bar and buffer's visual improvement.
-- Terminal on editor (you can run it with Alt+t).
-- And which-key to show all the available mappings!
+### Core Capabilities
 
-To check every mapping available, just run `:WhichKey` in the cmd of Neovim.
+- Intelligent Autocompletion (LSP-powered)
+- Integrated Debugger (nvim-dap)
+- Snippet Engine (Luasnip)
+- Advanced Syntax Highlighting (Treesitter)
+- System Clipboard Integration
+- Enhanced Notifications (nvim-notify)
 
-## Requirements
+### UI & Workflow Enhancements
 
-This configuration assumes that you have the following things installed:
+- Nightfox Theme Suite (with `Ctrl+c` theme cycler)
+- File Navigation (Telescope with fd/ripgrep)
+- Status Line (Lualine)
+- Which-key Interactive Keybindings
+- Image Preview (with Chafa/ImageMagick)
+- Terminal Integration (`Alt+t` toggle)
 
-- Neovim >= 0.10
-- tar
-- curl
-- libstdc++
-- Any C compiler
-- git
-- unzip
-- gzip
-- tar o gtar
-- npm
-- nodejs
-- [Ripgrep][1]
-- [fd][2]
-- Chafa
-- ImageMagick
-- pdftoppm
-- ffmpegthumbnailer
+## System Requirements
+
+### Essential Tools
+
+- Neovim (0.10+)
+- Git
+- Node.js (18+) & npm
+- Python 3.10+
+- C Compiler (GCC/Clang)
+
+### Recommended Utilities
+
+| Tool         | Purpose                  |
+| ------------ | ------------------------ |
+| [Ripgrep][1] | Fast file content search |
+| [fd][2]      | Efficient file discovery |
+| [Chafa][3]   | Terminal image previews  |
 
 ## Installation
 
-Once you have every dependencie installed on your system, you just have to copy
-the contents of this folder in your `$HOME/.config/nvim` directory.
+```bash
+# Copy this folder to config directory
+cp -r ./ ~/.config/
 
-After that, you'll have to open Neovim to make it run the bootstrap for lazy
-(the plugin manager). Quit after the installation of lazy and open it again to
-let lazy install the listed plugins.
+# Start Neovim to bootstrap plugin manager
+nvim
 
-Once everything is installed, you need to run inside Neovim the command
-`:TSInstall dap_repl` to add the treesitter support for the highlighting in the
-debugger.
+# After initial setup, install Treesitter REPL support
+:TSInstall dap_repl
 
-## About
+# Quit and restart Neovim for full initialization
+:qa
+nvim
+```
 
-If you want to see what plugins are installed, check the `lua/plugins/init.lua`
-file. All the files inside `lua/plugins` directory have the files used to
-configure the plugins with a too much code needed to set them up.
+## Key Bindings
+
+Access full keybinding reference with `:WhichKey`. Essential mappings:
+
+| Key         | Action                  |
+| ----------- | ----------------------- |
+| `<Space>`   | Leader mapping          |
+| `<leader>t` | Telescope bindings      |
+| `<leader>d` | Debugger bindings       |
+| `<leader>s` | Session bindings        |
+| `<leader>b` | Buffer actions          |
+| `Alt+t`     | Toggle Terminal         |
+| `Alt+[0-9]` | Go to buffer number 0-9 |
+| `Ctrl+c`    | Cycle color schemes     |
+
+## Plugins Highlights
+
+Configuration organized in `lua/plugins`:
+
+- **Core**: Lazy.nvim (plugin manager)
+- **LSP**: nvim-lspconfig, mason.nvim, etc.
+- **UI**: Telescope, Lualine, Barbar, etc.
+- **Debugging**: nvim-dap, nvim-dap-ui
+
+The organization is pretty intuitive and a lot of plugins have the default
+configuration.
+
+## Troubleshooting
+
+Common issues and solutions:
+
+- **Missing Treesitter Highlights**:
+
+```vim
+:TSUpdate
+:TSInstall dap_repl
+```
+
+- **Image Preview Not Working**:
+
+```bash
+# Install utilities
+sudo pacman -S imagemagick chafa ffmpegthumbnailer
+```
+
+If your distro isn't Arch based, the name of the packages should be the same,
+just change the installation command and you should be fine.
 
 [1]: https://github.com/BurntSushi/ripgrep
 [2]: https://github.com/sharkdp/fd
+[3]: https://github.com/hpjansson/chafa/

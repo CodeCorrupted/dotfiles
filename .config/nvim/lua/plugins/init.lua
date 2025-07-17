@@ -294,7 +294,7 @@ return {
       })
     end,
   },
-  -- Feline, status bar
+  -- Lualine, status bar
   {
     "nvim-lualine/lualine.nvim",
     opts = true,
