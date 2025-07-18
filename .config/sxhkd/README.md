@@ -16,14 +16,17 @@ This are the only shortcuts that can be used on others window managers.
 - `super + Supr`: launches the power menu.
 - `super + i`: run qutebrowser.
 - `super + shift + i`: run Vivaldi browser.
-- `super + Print`: run scrot to take an screenshot and save it on
+- `super + Print` or `super + s`: run scrot to take an screenshot and save it on
   `~/Images/Screenshots/`.
-- `super + shift + Print`: run scrot to take an screenshot of a section of the
-  screen and save it on `~/Images/Screenshots/`.
+- `super + shift + Print` or `super + shift + s`: run scrot to take an screenshot
+  of a section of the screen and save it on `~/Images/Screenshots/`.
 - `super + Tab`: run Rofi to switch between open windows.
 - Special keys to manage volume and bright are configured to run the scripts
   to do their tasks. Any of these increase or decrease at 5 percent step. For
-  more info, go to the `.scripts` folder.
+  more info, go to the `.scripts` folder. Also you can use `super + v` to
+  increase volume, `super + shift + v` to decrease volume and `super + alt + v`
+  to mute. For bright, `super + b` increases it and `super + shift + b`
+  decreases it
 - `super + alt + r`: reset bspwm.
 
 ## Layouts

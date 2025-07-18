@@ -44,6 +44,28 @@ super + shift + Print
 super + Tab
         rofi -show window
 
+# Alternative bindings
+
+super + v
+        bash ~/.scripts/volume_control.sh up
+
+super + shift + v
+        bash ~/.scripts/volume_control.sh down
+
+super + alt + v
+        bash ~/.scripts/volume_control.sh mute
+
+super + b
+        bash ~/.scripts/brightness_control.sh up
+
+super + shift + b
+        bash ~/.scripts/brightness_control.sh down
+super + s
+        scrot '%Y-%m-%d_%H-%M-%S_screenshot.png' -e 'mv $f ~/Images/Screenshots/'
+
+super + shift + s
+        scrot -s '%Y-%m-%d_%H-%M-%S_screenshot.png' -e 'mv $f ~/Images/Screenshots/'
+
 #
 # bspwm hotkeys
 #
