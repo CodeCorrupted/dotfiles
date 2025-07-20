@@ -31,6 +31,7 @@ main() {
   fi
 
   # Validate image
+  command -v realpath >/dev/null || die "'realpath' not found"
   IMG_PATH=$(realpath "$1")
   if [ ! -f "$IMG_PATH" ]; then
     echo "Archivo no encontrado: $IMG_PATH" >&2
@@ -60,6 +61,7 @@ main() {
       "\1${IMG_PATH}"
 
     i3-msg reload
+    xset s reset
 
   elif [[ $wm_code -eq 1 ]]; then
     betterlockscreen -u "$IMG_PATH"

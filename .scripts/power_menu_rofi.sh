@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+lock_guard() { pgrep -x i3lock && exit 0; }
+
 dir_theme="$HOME/.config/rofi/themes/power-menu.rasi"
 uptime="$(uptime -p | sed -e 's/up //g')"
 host=$(hostname)
@@ -67,6 +69,7 @@ case ${chosen} in
   run_cmd --reboot
   ;;
 "$lock")
+  lock_guard
   betterlockscreen -l blur
   ;;
 "$logout")

@@ -2,13 +2,16 @@
 import subprocess
 import time
 
-max_length = 20  # Caracteres visibles
-scroll_speed = 0.2  # Segundos por paso
-separator = " — "  # Separador título-artista
+max_length = 20
+scroll_speed = 0.2
+separator = " — "
 
 
 def get_metadata():
     try:
+        subprocess.run(
+            ["mpc"], check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL
+        )
         title = (
             subprocess.check_output(
                 ["mpc", "-f", "%title%"], text=True, stderr=subprocess.DEVNULL
@@ -32,7 +35,9 @@ def get_metadata():
 
         return full_text.replace("\n", " ")[:200]  # Limpiar y limitar longitud
 
-    except:
+    except FileNotFoundError:
+        return "mpc not found"
+    except subprocess.CalledProcessError:
         return "MPD Desconectado"
 
 

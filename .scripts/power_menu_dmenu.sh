@@ -2,6 +2,8 @@
 
 set -euo pipefail
 
+lock_guard() { pgrep -x i3lock && exit 0; }
+
 shutdown="  Shutdown"
 reboot="  Reboot"
 lock="  Lock"
@@ -12,7 +14,7 @@ no="  No"
 menu="${lock}\n${logout}\n${reboot}\n${shutdown}"
 
 dmenu_cmd() {
-  dmenu -i -l 4 -p "Power Menu: " -fn 'Hurmit Nerd Font' -nb '#0f0e1c' -nf '#a6d5d6' -sb '#29779A' -sf '#a6d5d6'
+  dmenu -i -l 4 -p "Power Menu: " -fn 'Hurmit Nerd Font' -nb '#1c1823' -nf '#dacecd' -sb '#3662CD' -sf '#dacecd'
 }
 
 confirm() {
@@ -53,6 +55,7 @@ case "$action" in
   i3-msg exit
   ;;
 --lock)
-  i3lock --image=/home/arc/Images/LockScreen/b53428fb-2a6f-4844-b76b-2ba20ce006eb.png
+  lock_guard
+  i3lock --image=/home/arc/Images/LockScreen/illust_121045114_20240801_170320.png
   ;;
 esac

@@ -1,89 +1,46 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-LOW_BATTERY_LEVEL=20
-BATTERY_PATH="/sys/class/power_supply/BAT1"
-CAPACITY_FILE="$BATTERY_PATH/capacity"
-STATUS_FILE="$BATTERY_PATH/status"
-notify_id=9999
+LOW=20
+ID=9999
 
-# Verifica existencia de archivos
-if [[ ! -f $CAPACITY_FILE || ! -f $STATUS_FILE ]]; then
-  echo "No se encontró info de batería en $BATTERY_PATH" >&2
+# find first battery
+BAT=$(printf '%s\n' /sys/class/power_supply/BAT* | head -n1)
+[[ -n $BAT ]] || {
+  echo "No battery found" >&2
   exit 1
-fi
-
-# Devuelve icono según nivel y estado
-choose_icon() {
-  local lvl=$1 state=$2 icon
-  case "$state" in
-  Charging)
-    if ((lvl <= LOW_BATTERY_LEVEL)); then
-      icon="battery-caution-charging-symbolic"
-    elif ((lvl <= 40)); then
-      icon="battery-low-charging-symbolic"
-    elif ((lvl <= 75)); then
-      icon="battery-good-charging-symbolic"
-    else
-      icon="battery-full-charging-symbolic"
-    fi
-    ;;
-  Full)
-    icon="battery-full-charged-symbolic"
-    ;;
-  Discharging)
-    if ((lvl <= LOW_BATTERY_LEVEL)); then
-      icon="battery-empty-symbolic"
-    elif ((lvl <= 40)); then
-      icon="battery-low-symbolic"
-    elif ((lvl <= 75)); then
-      icon="battery-good-symbolic"
-    else
-      icon="battery-full-symbolic"
-    fi
-    ;;
-  *)
-    icon="battery-caution-symbolic"
-    ;;
-  esac
-  printf '%s' "$icon"
 }
 
-last_status=""
-notified_low=false
-notified_full=false
+get() { printf '%s\n' "$(<"$BAT/capacity")"; }
+stat() { printf '%s\n' "$(<"$BAT/status")"; }
 
+choose_icon() {
+  local lvl=$1 st=$2
+  case $st in
+  Charging) icon="battery-caution-charging-symbolic" ;;
+  Full) icon="battery-full-charged-symbolic" ;;
+  *) icon="battery-empty-symbolic" ;;
+  esac
+  printf '%s\n' "$icon"
+}
+
+last_st=
+low_sent=false
 while true; do
-  level=$(<"$CAPACITY_FILE")
-  status=$(<"$STATUS_FILE")
-  icon=$(choose_icon "$level" "$status")
+  lvl=$(get)
+  st=$(stat)
+  icon=$(choose_icon "$lvl" "$st")
 
-  # Notificaciones únicas para cambios de estado
-  if [[ "$status" != "$last_status" ]]; then
-    case "$status" in
-    Charging)
-      dunstify -i "$icon" -r $notify_id -u normal "Cargando" "Nivel: ${level}%"
-      ;;
-    Full)
-      if [[ "$notified_full" == false ]]; then
-        dunstify -i "$icon" -r $notify_id -u normal "Batería llena" "100% completa"
-        notified_full=true
-      fi
-      ;;
-    esac
-    last_status="$status"
-  fi
+  [[ $st != "$last_st" ]] && {
+    dunstify -i "$icon" -r "$ID" -u normal "$st" "${lvl}%"
+    last_st=$st
+  }
 
-  # Alerta de batería baja
-  if [[ "$status" == "Discharging" && "$level" -le LOW_BATTERY_LEVEL && "$notified_low" == false ]]; then
-    dunstify -i "$icon" -r $notify_id -u critical "Batería baja" "Queda ${level}% — conecta el cargador"
-    notified_low=true
-  fi
+  [[ $st == Discharging && $lvl -le $LOW && $low_sent == false ]] && {
+    dunstify -i "$icon" -r "$ID" -u critical "Low battery" "${lvl}% remaining"
+    low_sent=true
+  }
 
-  # Reinicia la alerta si sube de umbral
-  if [[ "$status" == "Discharging" && "$level" -gt LOW_BATTERY_LEVEL ]]; then
-    notified_low=false
-  fi
-
+  [[ $st != Discharging || $lvl -gt $LOW ]] && low_sent=false
   sleep 60
 done

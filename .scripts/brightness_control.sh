@@ -2,39 +2,49 @@
 set -euo pipefail
 
 STEP=5
+ID=5555
 ICON="display-brightness-symbolic"
-NOTIF_ID=5555
 
-# Get the actual brightness percentage (0-100)
-get_brightness() {
-  xbacklight -get | cut -d '.' -f1
+# Detect if the system is using light or xbacklight
+if command -v light >/dev/null 2>&1; then
+  BL_CTL="light"
+  UP_OPT=("-A" "$STEP")
+  DN_OPT=("-U" "$STEP")
+elif command -v xbacklight >/dev/null 2>&1; then
+  BL_CTL="xbacklight"
+  UP_OPT=("-inc" "$STEP")
+  DN_OPT=("-dec" "$STEP")
+else
+  echo "No backlight tool found (install 'light' or 'xbacklight')" >&2
+  exit 1
+fi
+
+get_pct() {
+  case "$BL_CTL" in
+  light) light -G | cut -d'.' -f1 ;;
+  xbacklight) xbacklight -get | cut -d'.' -f1 ;;
+  esac
 }
 
-# Send the notifications with dunst
 send_notification() {
-  local brightness pct
-  brightness=$(get_brightness)
-  pct=$((brightness / STEP))
-  bar=$(printf '█%.0s' $(seq 1 $pct))
-  dunstify \
-    -i "$ICON" \
-    -r "$NOTIF_ID" \
-    -u normal \
-    "Brightness: $bar $brightness%"
+  local pct bar
+  pct=$(get_pct)
+  printf -v bar '%*s' $((pct / STEP)) ''
+  bar=${bar// /█}
+  dunstify -i "$ICON" -r "$ID" -u normal "Brightness: $bar $pct%"
 }
 
-# Up/Down brightness
 case "${1:-}" in
 up)
-  xbacklight -inc "$STEP" >/dev/null
+  "$BL_CTL" "${UP_OPT[@]}" >/dev/null
   send_notification
   ;;
 down)
-  xbacklight -dec "$STEP" >/dev/null
+  "$BL_CTL" "${DN_OPT[@]}" >/dev/null
   send_notification
   ;;
 *)
-  echo "Uso: $0 {up|down}" >&2
+  echo "Usage: $0 {up|down}" >&2
   exit 1
   ;;
 esac

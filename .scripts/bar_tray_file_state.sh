@@ -1,16 +1,32 @@
 #!/usr/bin/env bash
 
 BAR_NAME="bar-tray"
-STATE_FILE="/tmp/polybar_${BAR_NAME}_state"
+PID_FILE="/tmp/polybar_${BAR_NAME}.pid"
+LOG_FILE="/tmp/polybar_${BAR_NAME}.log"
 
-# Read actual state
-if [[ -f "$STATE_FILE" && "$(cat $STATE_FILE)" == "open" ]]; then
-  # If its open, close it
-  pkill -f "polybar $BAR_NAME"
-  echo "closed" >"$STATE_FILE"
-else
-  # if its closed, open it
-  echo "---" | tee -a /tmp/polybar2.log
-  polybar "$BAR_NAME" >>/tmp/polybar2.log 2>&1 &
-  echo "open" >"$STATE_FILE"
+start_bar() {
+  [[ $(stat -c%s "$LOG_FILE" 2>/dev/null || echo 0) -gt 1048576 ]] && mv "$LOG_FILE"{,.old}
+  echo "---" | tee -a "$LOG_FILE"
+  polybar "$BAR_NAME" >>"$LOG_FILE" 2>&1 &
+  echo $! >"$PID_FILE"
+}
+
+stop_bar() {
+  local pid
+  pid=$(<"$PID_FILE")
+  if kill -0 "$pid" 2>/dev/null; then
+    kill "$pid"
+    while kill -0 "$pid" 2>/dev/null; do sleep 0.1; done
+  fi
+  rm -f "$PID_FILE"
+}
+
+if [[ -f $PID_FILE ]]; then
+  pid=$(<"$PID_FILE")
+  if kill -0 "$pid" 2>/dev/null; then
+    stop_bar
+    exit 0
+  fi
 fi
+
+start_bar

@@ -12,6 +12,12 @@ POLYBAR_COLORS="$HOME/.config/polybar/colors.ini"
 BSPWM_AUTOSTART="$HOME/.config/bspwm/autostart.sh"
 ROFI_COLORS="$HOME/.config/rofi/colors/theme-pywal.rasi"
 
+# Helper function to restart polybar
+restart_polybar() {
+  pkill -USR1 polybar 2>/dev/null || true
+  polybar-msg cmd restart 2>/dev/null || true
+}
+
 # Function to replace values with sed
 # args: <file> <pattern> <replacement>
 update_config() {
@@ -83,6 +89,9 @@ update_colors() {
     # reload i3
     i3-msg reload
     i3-msg restart
+    # restart dunst
+    pkill dunst
+    dunst -conf "$HOME/.config/dunst/dunstrc-i3" &
   elif [[ $wm == "bspwm" ]]; then
     # alacritty
     wal_alacritty.sh ~/.config/alacritty/colors.toml
@@ -107,16 +116,15 @@ update_colors() {
     update_config "$POLYBAR_COLORS" '^date = .*' "date = ${ACC4}"
     update_config "$POLYBAR_COLORS" '^battery = .*' "battery = ${RED}"
     # restart polybar
-    polybar-msg cmd restart &>/dev/null
+    restart_polybar
     # dunst
     update_config "$DUNST_CONF_BSPWM" "^[[:space:]]*background[[:space:]]*= .*" "    background = \"${BG}\""
     update_config "$DUNST_CONF_BSPWM" "^[[:space:]]*foreground[[:space:]]*= .*" "    foreground = \"${FG}\""
     update_config "$DUNST_CONF_BSPWM" "^[[:space:]]*frame_color[[:space:]]*= .*" "    frame_color = \"${ACC2}\""
+    # restart dunst
+    pkill dunst
+    dunst -conf "$HOME/.config/dunst/dunstrc-bspwm" &
   fi
-
-  # restart dunst
-  pkill dunst
-  dunst &
 }
 
 main() {
