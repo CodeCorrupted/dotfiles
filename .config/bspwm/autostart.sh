@@ -2,9 +2,9 @@
 
 # This function only executes a program if it's not already running
 run() {
-  if ! pgrep -f "$1"; then
-    "$@" &
-  fi
+	if ! pgrep -f "$1"; then
+		"$@" &
+	fi
 }
 
 # Set keyboard layout to es-latam & us, and change between them with alt+shift
@@ -12,7 +12,7 @@ setxkbmap latam,us
 setxkbmap -option 'grp:alt_shift_toggle'
 
 # Set the wallpapper for bspwm
-xwallpaper --zoom '/home/arc/Images/Wallpapers/175246a9-f234-4149-80b1-e2bf3995d957.png'
+xwallpaper --zoom "$HOME/Images/Wallpapers/2256.jpg"
 
 # Run polybar
 run ~/.config/polybar/launch.sh

@@ -28,7 +28,7 @@ bspc rule -a Blueman-manager state=floating
 bspc rule -a Snes9x-gtk state=floating
 bspc rule -a gnome-calculator state=floating
 bspc rule -a SimpleScreenRecorder state=floating
-bspc rule -a Gimp desktop='^8' state=floating follow=on
+bspc rule -a Gimp state=floating
 
 # Set rules for type and role windows
 bspc config external_rules_command "$HOME/.config/bspwm/external_rules.sh"

@@ -1,51 +1,57 @@
-# BSPWM
+# BSPWM Configuration
 
-There are a few diffs between this configuration and the default one. This diffs
-are:
+Minimal configuration for bspwm, made for Artix with OpenRC as init and X11
+as window display server.
 
-- Autostart of applications.
-- Some rules for specific windows.
+## Installation
 
-## Dependencies
+Install required dependencies, which are executed at start:
 
-There's no such thing like real dependencies here. All of them are optional, but
-if you want to this to work from the start, you better have the following things:
+```sh
+sudo pacman -S --needed \
+  xwallpapper picom connman-gtk polybar redshift udiskie dunst
+  mpd blueman-applet xautolock wmname sxhkd xorg-apps connman-openrc
 
-- [Xwallpapper](https://github.com/stoeckmann/xwallpaper)
-- [Polybar](https://github.com/polybar/polybar)
-- [Picom](https://github.com/yshui/picom)
-- [Connman-gtk](https://github.com/jgke/connman-gtk)
-- [Redshift](https://github.com/jonls/redshift)
-- [Udiskie](https://github.com/coldfix/udiskie)
-- [Dunst](https://dunst-project.org/documentation/)
-- [MPD](https://www.musicpd.org/)
-- [Blueman](https://wiki.archlinux.org/title/Blueman)
-- [Xautolock](https://wiki.archlinux.org/title/Session_lock#xautolock)
-- [Betterlockscreen](https://github.com/betterlockscreen/betterlockscreen)
+yay -S betterlockscreen
+```
 
-All those "dependencies" run at start through the `autostart.sh` file.
+You also need from this dotfiles:
 
-## About
+- The script `battery_check.sh`.
+- Config of `polybar` (or at least the `launch.sh` script under
+  `~/.config/polybar/` directory)
+- `mpd` (or your config at `~/.config/mpd/`)
+- `dunst` (or your own config under `~/.config/dunst/`, modifying the line 33
+  of `autostart.sh` to charge your config file)
+- `sxhkd` to get keybindings on `bspwm` (or you can use your own configuration)
 
-The main configuration is on bspwmrc. The windows of the following applications
-are initiated as floating windows:
+Then, you have to clone this repository and do:
 
-- [mGBA](https://mgba.io/)
-- [Citra](https://citra-emulator.com/)
-- [PPSSPP](https://www.ppsspp.org/)
-- [m64py](https://m64py.sourceforge.net/)
-- [Dolphin (emulator)](https://dolphin-emu.org/)
-- [Connman-gtk](https://github.com/jgke/connman-gtk)
-- [Blueman](https://wiki.archlinux.org/title/Blueman)
-- [Snes9x](https://www.snes9x.com/)
-- [Calculator (gnome)](https://gitlab.gnome.org/GNOME/gnome-calculator)
-- [SimpleScreenRecorder](https://github.com/MaartenBaert/ssr)
-- [Gimp](https://www.gimp.org/downloads/)
-- And every menu application or similar (those that should be displayed as
-  floating windows).
+```sh
+mkdir -p ~/.config/bspwm/
+cp dotfiles/bspwm/*.sh dotfiles/bspwm/bspwmrc ~/.config/bspwm/
+```
 
-The last one is defined with the file `external_rules.sh`, since bspc can't
-do this without some external help.
+And edit the line 15 to set your wallpapper and run `betterlockscreen` to set
+a lock-wallpapper. You can also use the scripts `set_update_wallpapper.sh` and
+`set_lock_wallpapper.sh` if you want (read the README file on that directory to
+get more info).
 
-The `autostart.sh` file just run the applications listed on the dependencies
-sections. You can edit it to put your favorite applications instead.
+## Features
+
+- **Ten** desktops
+- Gapless monocle mode, 2px borders and 12px gaps.
+- **Smart floating rules** for:
+  - Emulators.
+  - Utilities.
+  - System tools
+  - Menus, pop-up, etc.
+- Runs java applications without problems.
+
+## Customize
+
+If you need to do changes:
+
+- **autostart.sh**: run services and daemons.
+- **bspwmrc**: setup desktops, gaps and other things of bspwm.
+- **external_rules.sh**: set floating windows by roles.
