@@ -1,19 +1,43 @@
 # BEGIN WAL
+# END WAL
+# BEGIN WAL
+# END WAL
+# BEGIN WAL
+# END WAL
+# BEGIN WAL
+# END WAL
+# BEGIN WAL
+# END WAL
+# BEGIN WAL
+# END WAL
+# BEGIN WAL
+# END WAL
+# BEGIN WAL
+# END WAL
+# BEGIN WAL
+# END WAL
+# BEGIN WAL
+# END WAL
+# BEGIN WAL
+# END WAL
+# BEGIN WAL
+# END WAL
+# BEGIN WAL
 [colors.primary]
-background = '#0e0e1c'
-foreground = '#9fc9ed'
+background = '#00000D'
+foreground = '#91e1d1'
 
 [colors.cursor]
-text   = '#0e0e1c' # Apply background color to color of text inside cursor
-cursor = '#9fc9ed' # Apply foreground color to color of cursor
+text   = '#00000D'
+cursor = '#91e1d1'
 
 [colors.vi_mode_cursor]
-text    = '#0e0e1c' # Same as above
-cursor  = '#9fc9ed'
+text   = '#00000D'
+cursor = '#91e1d1'
 
 [colors.search.matches]
-foreground = '#0e0e1c' # Same as above
-background = '#9fc9ed' # Apply bright/white color to bg color of matching search
+foreground = '#00000D'
+background = '#91e1d1'
 
 [colors.search.focused_match]
 foreground = 'CellBackground'
@@ -24,30 +48,30 @@ foreground = 'None'
 background = 'None'
 
 [colors.footer_bar]
-foreground = '#6f8ca5'
-background = '#9fc9ed'
+foreground = '#659d92'
+background = '#91e1d1'
 
 [colors.selection]
 text       = 'CellBackground'
 background = 'CellForeground'
 
 [colors.normal]
-black   = '#0e0e1c'
-red     = '#5A349B'
-green   = '#4041A3'
-yellow  = '#6655D7'
-blue    = '#A743AD'
-magenta = '#965BEB'
-cyan    = '#DA71F4'
-white   = '#9fc9ed'
+black   = '#00000D'
+red     = '#AB345F'
+green   = '#F35D70'
+yellow  = '#3EBC75'
+blue    = '#F2B670'
+magenta = '#215C93'
+cyan    = '#E8678D'
+white   = '#91e1d1'
 
 [colors.bright]
-black   = '#6f8ca5'
-red     = '#5A349B'
-green   = '#4041A3'
-yellow  = '#6655D7'
-blue    = '#A743AD'
-magenta = '#965BEB'
-cyan    = '#DA71F4'
-white   = '#9fc9ed'
+black   = '#659d92'
+red     = '#AB345F'
+green   = '#F35D70'
+yellow  = '#3EBC75'
+blue    = '#F2B670'
+magenta = '#215C93'
+cyan    = '#E8678D'
+white   = '#91e1d1'
 # END WAL
