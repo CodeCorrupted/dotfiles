@@ -1,103 +1,95 @@
-# sxhkd
+# SXHKD Configuration
 
-This file is used on bspwm to define the keyboard shortcuts for the window
-manager.
+Minimal configuration of `sxhkd` to work on `bspwm`.
 
-The following is a list of the keyboard shortcuts configured in this file
-(remember that "super" is for "window's key"):
+## Quickstart
 
-## Applications
+To get all the keyboard shortcuts working at start, just run:
 
-This are the only shortcuts that can be used on others window managers.
+```sh
+sudo pacman -S --needed \
+  bspwm sxhkd alacritty rofi vivaldi qutebrowser scrot
+```
 
-- `super + Return`: open Alacritty terminal.
-- `super + d`: open Rofi (application launcher).
-- `super + Escape`: reset sxhkd.
-- `super + Supr`: launches the power menu.
-- `super + i`: run qutebrowser.
-- `super + shift + i`: run Vivaldi browser.
-- `super + Print` or `super + s`: run scrot to take an screenshot and save it on
-  `~/Images/Screenshots/`.
-- `super + shift + Print` or `super + shift + s`: run scrot to take an screenshot
-  of a section of the screen and save it on `~/Images/Screenshots/`.
-- `super + Tab`: run Rofi to switch between open windows.
-- Special keys to manage volume and bright are configured to run the scripts
-  to do their tasks. Any of these increase or decrease at 5 percent step. For
-  more info, go to the `.scripts` folder. Also you can use `super + v` to
-  increase volume, `super + shift + v` to decrease volume and `super + alt + v`
-  to mute. For bright, `super + b` increases it and `super + shift + b`
-  decreases it
-- `super + alt + r`: reset bspwm.
+You also need the scripts (under the `~/.scripts/` directory):
 
-## Layouts
+- `volume_control.sh` (rise/low the volume)
+- `brightness_control.sh` (rise/low brightness)
+- `power_menu_rofi.sh` (displays a power menu through rofi)
 
-- `super + m`: switch to next layout.
+Please, checkout the dependencies needed for those scripts on `.scripts/README.md`
 
-## Windows (only bspwm)
+## Keymaps
 
-### Actions on windows
+Remember that `super` is the "Windows" key.
 
-- `super + w`: close the focused window.
-- `super + shift + w`: kill the focused window.
-- `super + t`: set the focused window as tiled.
-- `super + shift + t`: set the focused window as pseudo-tiled.
-- `super + s`: set the focused window as float.
-- `super + f`: set the focused window as fullscreen.
+### Independent of the WM (Window Manager)
 
-### Focus
+| Key                                     | What it does                                                                 |
+| --------------------------------------- | ---------------------------------------------------------------------------- |
+| `super+Return`                          | open terminal (`alacritty`)                                                  |
+| `super+d`                               | open the app launcher (`rofi`)                                               |
+| `super+Escape`                          | reset `sxhkd`                                                                |
+| `super+Delete`                          | open the power menu (`~/.scripts/power_menu_rofi.sh`)                        |
+| `super+i`/`super+Shift+i`               | open browser (`qutebrowser`/`vivaldi`)                                       |
+| `XF86AudioRaiseVolume`/`super+v`        | +10% volume (`~/.scripts/volume_control.sh up`)                              |
+| `XF86AudioLowerVolume`/`super+Shift+v`  | -10% volume (`~/.scripts/volume_control.sh down`)                            |
+| `XF86AudioMute`/`super+Alt+v`           | mute volume (`~/.scripts/volume_control.sh mute`)                            |
+| `XF86MonBrightnessUp`/`super+b`         | +5% brightness (`~/.scripts/brightness_control.sh up`)                       |
+| `XF86MonBrightnessDown`/`super+Shift+b` | -5% brightness (`~/.scripts/brightness_control.sh down`)                     |
+| `super+Print`/`super+Alt+s`             | full screenshot (use `scrot`, and is saved on `~/Images/Screenshots/`)       |
+| `super+Shift+Print`/`super+Shift+s`     | section to screenshot (use `scrot`, and is saved on `~/Images/Screenshots/`) |
+| `super+Tab`                             | switch to another window (`rofi`)                                            |
 
-- `super + h`: switch focus to the window at the left.
-- `super + j`: switch focus to the window at the bottom.
-- `super + k`: switch focus to the window at the top.
-- `super + l`: switch focus to the window at the right.
-- `super + space`: switch focus with the next window.
-- `super + shift + space`: switch focus with the previous window.
+### Bspwm Hotkeys
 
-### Move
+| Key                       | What it does                                 |
+| ------------------------- | -------------------------------------------- |
+| `super+Alt+r`             | reset `bspwm`                                |
+| `super+w`/`super+Shift+w` | close/kill focused window                    |
+| `super+g`                 | swap the current node and the biggest window |
 
-- `super + Left`: move the focused floating window to the left.
-- `super + Up`: move the focused floating window to top.
-- `super + Down`: move the focused floating window to the bottom.
-- `super + Right`: move the focused floating window to the right.
-- `super + shift + h`: switch places with the window at the left.
-- `super + shift + j`: switch places with the window at the bottom.
-- `super + shift + k`: switch places with the window at the top.
-- `super + shift + l`: switch places with the window at the right.
-- `super + shift + 1 - 0`: switch the focus window to desktop 1 - 10.
-- `super + g`: switch places between focused window with the next biggest window.
+#### Layout
 
-### Resize
+| Key             | What it does                                     |
+| --------------- | ------------------------------------------------ |
+| `super+m`       | cycle between tiled and monocle layout (desktop) |
+| `super+t`       | set window as tiled layout                       |
+| `super+Shift+t` | set window as pseudo-tiled layout                |
+| `super+s`       | set window as floating layout                    |
+| `super+f`       | set window as fullscreen layout                  |
 
-- `super + alt + h`: increase size of the window to the left.
-- `super + alt + j`: increase size of the window to the bottom.
-- `super + alt + k`: increase size of the window to top.
-- `super + alt + l`: increase size of the window to the right.
-- `super + ctrl + alt + h`: decrease size of the window by the left.
-- `super + ctrl + alt + j`: decrease size of the window by the bottom.
-- `super + ctrl + alt + k`: decrease size of the window by top.
-- `super + ctrl + alt + l`: decrease size of the window by the right.
+#### Flags & selection
 
-### Preselected
+| Key                      | What it does                                               |
+| ------------------------ | ---------------------------------------------------------- |
+| `super+Ctrl+m`           | set window as marked                                       |
+| `super+Ctrl+x`           | set window as locked                                       |
+| `super+Ctrl+y`           | set window as sticky                                       |
+| `super+Ctrl+z`           | set window as private                                      |
+| `super+y`                | send the newest marked node to the newest preselected node |
+| `super+Ctrl+{h,j,k,l}`   | preselect direction (left/down/up/right)                   |
+| `super+Ctrl+{1-9}`       | preselect ratio (size of window)                           |
+| `super+Ctrl+Space`       | cancel preselection for the focused node                   |
+| `super+Ctrl+Shift+Space` | cancel preselection for the current desktop                |
 
-- `super + y`: send the most recent marked window to the newest preselected node
-- `super + ctrl + m`: mark the focused window.
-- `super + ctrl + x`: lock the focused window.
-- `super + ctrl + y`: stick the focused window.
-- `super + ctrl + z`: set as private the focused window.
-- `super + ctrl + h`: preselect left side.
-- `super + ctrl + j`: preselect top side.
-- `super + ctrl + k`: preselect bottom side.
-- `super + ctrl + l`: preselect right side.
-- `super + ctrl + 1-9`: preselect ratio (size of the new node).
-- `super + ctrl + space`: cancel the preselection for the focused node.
-- `super + ctrl + shift + space`: cancel the preselection for the focused desktop.
+#### Focus & Swap
 
-## Workspaces (only bspwm)
+| Key                               | What it does                                                      |
+| --------------------------------- | ----------------------------------------------------------------- |
+| `super+{h,j,k,l}`                 | focus window at left/down/up/right                                |
+| `super+Shift+{h,j,k,l}`           | swap with window at left/down/up/right                            |
+| `super+Shift+Space`/`super+Space` | focus the previous/next window in the current desktop             |
+| `super+[`/`super+]`               | focus previous/next desktop                                       |
+| `super+{1-9,0}`                   | focus desktop 1-10                                                |
+| `super+Shift+{1-9,0}`             | send current focused window at desktop 1-10                       |
+| `super+p`/`super+n`               | focus the previous/next occupied desktop                          |
+| `super+Shift+p`/`super+Shift+n`   | send current focused window at the previous/next occupied desktop |
 
-- `super + 1 - 0`: switch to desktop 1 - 10.
-- `super + [`: focus previous desktop in the current monitor.
-- `super + ]`: focus next desktop in the current monitor.
-- `super + n`: focus next occupied desktop.
-- `super + p`: focus previous occupied desktop.
-- `super + shift + n`: send focused window to the next occupied desktop.
-- `super + shift + p`: send focused window to the previous occupied desktop.
+#### Move & Resize
+
+| Key                          | What it does                                 |
+| ---------------------------- | -------------------------------------------- |
+| `super+Alt+{h,j,k,l}`        | expand the window to left/down/up/right      |
+| `super+Ctrl+Alt+{h,j,k,l}`   | contract the window at left/down/up/right    |
+| `super+{Left,Down,Up,Right}` | move a floating window at left/down/up/right |

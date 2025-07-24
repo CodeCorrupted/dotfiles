@@ -60,7 +60,8 @@ super + b
 
 super + shift + b
         bash ~/.scripts/brightness_control.sh down
-super + s
+
+super + alt + s
         scrot '%Y-%m-%d_%H-%M-%S_screenshot.png' -e 'mv $f ~/Images/Screenshots/'
 
 super + shift + s
@@ -114,7 +115,7 @@ super + {_,shift + }{h,j,k,l}
 super + {_,shift + }space
 	bspc node -f {next,prev}.local.!hidden.window
 
-# focus the next/previous desktop in the current monitor
+# focus the next/previous desktop
 super + bracket{left,right}
 	bspc desktop -f {prev,next}.local
 
