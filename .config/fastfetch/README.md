@@ -1,4 +1,12 @@
-# Fastfetch
+# Fastfetch Configuration
 
-This configuration uses an ASCII image and needs some patched font to display
-the icons correctly. Change the ASCII art on the `ascii.txt` file.
+Simple and minimal configuration for fastfetch:
+
+[Preview](../../assets/screenshots/fastfetch_preview.png)
+
+## Customize
+
+The `ascii.txt` file contains the ASCII art to display for fastfetch. You can
+replace it for anything you like.
+
+The `config.jsonc` file contains the configuration itself.
