@@ -1,17 +1,24 @@
-# Picom
+# Picom Configuration
 
-Click to reproduce!
+Minimal, **GPU-accelerated** compositor setup with:
 
-[![Look demo](../../assets/screenshots/picom_preview.png)](../../assets/videos/picom_demo.mp4)
+- **Dual-kawase blur** on transparent windows.
+- **Selective shadows & rounded corners**
+- **Smooth animations** for open/close, menus, notifications.
+- **Opacity rules** for terminals, file-managers, rofi, etc.
 
-<details>
-<summary>Alternative for GitHub (click to see)</summary>
+## Quickstart
 
-https://github.com/user-attachments/assets/037136dd-ebcb-41e0-a678-54412569153e
+Clone this repo and then:
 
-</details>
+```sh
+# Install picom
+sudo pacman -S --needed picom
 
-This configuration sets the transparency, blur and animations used on windows.
+# Copy this config
+mkdir -p ~/.config/picom
+cp dotfiles/picom/picom.conf ~/.config/picom/
 
-Its independent of the wm you use, so it should work properly wherever you use
-it.
+# Launch picom
+picom -b
+```
