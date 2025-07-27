@@ -49,11 +49,13 @@ end
 
 -- Enable some languages servers with the aditional completion capabilities and mappings
 local servers = { "bashls", "cssls", "html", "jsonls", "marksman", "lua_ls", "pyright" }
+-- vim.lsp.enable(servers, true)
 for _, lsp in ipairs(servers) do
-  lspconfig[lsp].setup({
+  vim.lsp.config(lsp, {
     on_attach = on_attach,
     capabilities = capabilities,
   })
+  vim.lsp.enable(lsp)
 end
 
 -- TypeScript configuration
@@ -90,18 +92,19 @@ require("typescript-tools").setup({
 })
 
 -- JavaScript configuration
-lspconfig.ts_ls.setup({
+vim.lsp.config('ts_ls', {
   on_attach = on_attach,
-  filetypes = { "javascript" },
+  filetypes = {"javascript"},
   init_options = {
     preferences = {
       disableSuggestions = true,
     }
   }
 })
+vim.lsp.enable('ts_ls')
 
 -- Angular configuration
-lspconfig.angularls.setup({
+vim.lsp.config('angularls', {
   on_attach = function(client, bufnr)
     on_attach(client, bufnr)
     local opts = { noremap = true, silent = true }
@@ -121,3 +124,4 @@ lspconfig.angularls.setup({
   end,
   capabilities = capabilities,
 })
+vim.lsp.enable('angularls')

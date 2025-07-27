@@ -33,29 +33,34 @@ with extensibility for other platforms.
 - Image Preview (with Chafa/ImageMagick)
 - Terminal Integration (`Alt+t` toggle)
 
-## System Requirements
+## Dependencies
 
-### Essential Tools
+Make sure you have the following mandatory dependencies:
 
-- Neovim (0.10+)
+- Neovim >=0.11
 - Git
-- Node.js (18+) & npm
+- Node.js >= 18 & npm
 - Python 3.10+
+- Typescript >= 4.0
 - C Compiler (GCC/Clang)
-
-### Recommended Utilities
-
-| Tool         | Purpose                  |
-| ------------ | ------------------------ |
-| [Ripgrep][1] | Fast file content search |
-| [fd][2]      | Efficient file discovery |
-| [Chafa][3]   | Terminal image previews  |
+- A [patched font](https://www.nerdfonts.com/font-downloads)
+- [Ripgrep](https://github.com/BurntSushi/ripgrep)
+- [fd](https://github.com/sharkdp/fd)
+- [Chafa](https://github.com/hpjansson/chafa/)
+- [ImageMagick](https://imagemagick.org/)
+- [ffmpegthumbnailer](https://github.com/dirkvdb/ffmpegthumbnailer)
+- [pdftoppm](https://linux.die.net/man/1/pdftoppm)
 
 ## Installation
 
 ```bash
+# Install every dependency (fonts not included, only Arch based systems)
+sudo pacman -S --needed \
+  neovim git nodejs python tar curl unzip gzip npm typescript ripgrep
+  fd chafa ffmpegthumbnailer poppler
+
 # Copy this folder to config directory
-cp -r ./ ~/.config/
+cp -r dotfiles/nvim ~/.config/
 
 # Start Neovim to bootstrap plugin manager
 nvim
@@ -85,7 +90,7 @@ Access full keybinding reference with `:WhichKey`. Essential mappings:
 
 ## Plugins Highlights
 
-Configuration organized in `lua/plugins`:
+Configuration organized in `lua/plugins/`:
 
 - **Core**: Lazy.nvim (plugin manager)
 - **LSP**: nvim-lspconfig, mason.nvim, etc.
@@ -105,17 +110,3 @@ Common issues and solutions:
 :TSUpdate
 :TSInstall dap_repl
 ```
-
-- **Image Preview Not Working**:
-
-```bash
-# Install utilities
-sudo pacman -S imagemagick chafa ffmpegthumbnailer
-```
-
-If your distro isn't Arch based, the name of the packages should be the same,
-just change the installation command and you should be fine.
-
-[1]: https://github.com/BurntSushi/ripgrep
-[2]: https://github.com/sharkdp/fd
-[3]: https://github.com/hpjansson/chafa/

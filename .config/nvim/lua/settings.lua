@@ -33,7 +33,7 @@ local function save_colorscheme(scheme)
 end
 
 -- Apply the colorscheme at start
-vim.cmd("colorscheme duskfox")
+vim.cmd("colorscheme carbonfox")
 
 -- Function to cycle through color schemes
 function SwitchColorscheme()
