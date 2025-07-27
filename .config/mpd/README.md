@@ -1,15 +1,30 @@
-# MPD
+# MPD Configuration
 
-This will work propperly if you:
+A drop-in `mpd.conf` that keeps **PulseAudio compatibility** while adding
+ReplayGain, Zeroconf and faster library updates.
 
-- have your music on `~/Music/`
-- use pulseaudio
+## Quickstart
 
-If you use mpd, verify that you have the file `.config/mpdnotify.conf`. It 
-isn't required that you have it, but that file displays a notification that 
-shows you the name, artist and album of the song currently playing if ncmpcpp
-is open (it triggers when the song change) and, if there's an image in the folder 
-where the music is named as (front | cover | art).(png | jpg | jpeg | gif).
+Clone this repo and then:
 
-You must create the playlist folder under this directory to correctly save your
-playlists.
+```sh
+sudo pacman -S --needed mpd
+
+# Copy the configuration
+mkdir -p ~/.config/mpd
+cp dotfiles/mpd/mpd.conf ~/.config/mpd/
+
+# Reload or initialize mpd
+systemctl start mpd
+# or
+systemctl restart mpd
+# or
+pkill -USR1 mpd && mpd ~/.config/mpd/mpd.conf
+```
+
+## Directory layout assumed
+
+| Path            | Content                            |
+| --------------- | ---------------------------------- |
+| `~/Music/`      | Your music files                   |
+| `~/.config/mpd` | Config, logs, playlist, sticker DB |
