@@ -36,7 +36,7 @@ run ~/.fehbg
 run blueman-applet
 
 # Start process to detect inactivity and lock screen after 10 minutes
-run xautolock -detectsleep -time 10 -locker "i3lock --image=/home/arc/Images/LockScreen/b53428fb-2a6f-4844-b76b-2ba20ce006eb.png"
+run xautolock -detectsleep -time 10 -locker "i3lock --image=/home/arc/Images/LockScreen/illust_121045114_20240801_170320.png"
 
 # Start script to check battery charge. Commment if you don't use a laptop
 run ~/.scripts/battery_check.sh

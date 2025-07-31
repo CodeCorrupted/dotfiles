@@ -1,194 +1,194 @@
-# I3 config file
+# I3 Configuration
 
-These are my config files for the [Tiling Windows Manager][1] [i3][2].
-
-Were made with this things on mind:
-
-1. To use on Artix Linux with OpenRC as init.
-2. With a %60 keyboard and only one layout, ES-latam in this case.
-3. Only one Screen.
-
-This means that you can't find an use to special keys, probably some keybindings
- doesn't work if you have another layout or some things won't work as expected
- when trying to run this config file on another distro of Linux.
+Configuration of i3 centered on laptops with only one screen and to improve
+my productivity and commodity.
 
 ## Installation
 
-Besides to clone this folder on your `$HOME/.config/` directory, you need to install:
+Clone this repo and then:
 
-- [Hack Nerd Fonts][3].
-- [Connman][4].
-- [Picom][5].
-- [Nitrogen][6].
-- [Pywal][7].
-- [MPD][9].
-- [Brightnessctl][10].
-- [Redshift][11].
-- [Parcellite][28].
-- [Kitty][12].
-- [Rofi][13].
-- [Candy Icons][14].
-- [Scrot][15].
-- [Pulseaudio][16].
-- [Firefox][17].
-- [Thunderbird][18].
-- [Qutebrowser][19].
-- [Keepass][20].
-- [VLC][21].
-- [Pomotroid][22].
-- [Steam][23].
-- [mGBA][24].
-- [Telegram][25].
-- [Discord][26].
-- [Polybar][27].
+```sh
+sudo pacman -S --needed i3-wm i3status i3lock
 
-Some programs are optional, but if you want that all the keybindings work, you have
- to install all of them.
+cp -r dotfiles/.config/i3 ~/.config
+cp -r dotfiles/.config/i3status ~/.config
+```
+
+Also, you need to have the following programs to get all the features of this
+configuration:
+
+### Fonts
+
+- [Hack Nerd Font, Hurmit Nerd Font and JetBrainsMono Nerd Font](https://www.nerdfonts.com/font-downloads).
+
+### Programs that run at start
+
+Just run the following script on your terminal:
+
+```sh
+sudo pacman -S --needed \
+  xorg-xsetxkbmap picom connman-gtk redshift udiskie dunst mpd blueman-applet
+  xautolock feh
+```
+
+And the scripts `.scripts/battery_check.sh` and `.scripts/bright_status.sh`.
+
+Run `feh` to set your wallpapper and modify the path to the `i3lock` image on
+line 39 of `autostart.sh` (and the line 37 of `conf.d/bindings.conf`). Also,
+modify as you like the command that `dunst` uses as its configuration.
+
+### Programs on bindings
+
+These programs are optional, so if you don't use any of them, just edit the
+`conf.d/bindings.conf` and `conf.d/modes.conf` to change or delete the bindings
+relationated to them:
+
+```sh
+sudo pacman -S --needed \
+  kitty dmenu scrot vivaldi qutebrowser libreoffice-fresh geogebra obsidian
+  gimp keepassxc thunar gnome-calculator bleachbit telegram-desktop thunderbird
+  steam mgba-qt desmume ppsspp dolphin-emu
+
+# Install from AUR
+yay -S --needed umlet pomotroid-bin citra
+```
+
+And the scripts:
+
+- `.scripts/dmenu_window.sh`
+- `.scripts/power_menu_dmenu.sh`
+- `.scripts/volume_control.sh`
+- `.scripts/brightness_control.sh`
 
 ## Bindings
 
-The main or **modifier** key is the _Windows_ or _Super_ key, from now on it will
- be referred to as $mod. This means that you need that key for almost every keybinding.
+The main or **modifier** key is the _Windows_ key, from now on it will be referred
+to as $mod.
 
-### Launch some applications (without entering into some mode)
+All these bindings are set in the `bindings.conf` and `workspaces.conf` files.
 
-- $mod + Return: launch the terminal's emulator.
-- $mod + d: launch rofi, a menu of applications.
-- $mod + c: launch rofi as a calculator.
-- $mod + x: take a screenshot with scrot.
+### Focus & Swap
 
-### Focus and splits on windows
+| Key                           | What it does                                            |
+| ----------------------------- | ------------------------------------------------------- |
+| `$mod+{h,j,k,l}`              | Focus the window at the left/down/up/right              |
+| `$mod+Shift+{h,j,k,l}`        | Swap with the window at the left/down/up/right          |
+| `$mod+{1-9,0}`                | Focus workspace 1-10                                    |
+| `$mod+Shift+{1-9,0}`          | Send focused window at workspace 1-10                   |
+| `$mod+n`/`$mod+p`             | Focus next/previous occupied workspace                  |
+| `$mod+Shift+n`/`$mod+Shift+p` | Send focused window at next/previous occupied workspace |
 
-- $mod + Shift + q: kill the focused window.
-- $mod + j: focus left window.
-- $mod + k: focus bottom window.
-- $mod + l: focus top window.
-- $mod + ñ: focus right window.
-- $mod + Shift + j: switch places of the focused window with the window at the left.
-- $mod + Shift + k: switch places of the focused window with the window at bottom.
-- $mod + Shift + l: switch places of the focused window with the window at top.
-- $mod + Shift + ñ: switch places of the focused window with the window at the right.
-- $mod + h: horizontal split.
-- $mod + v: vertical split.
-- $mod + t: toggle between vertical and horizontal split.
-- $mod + Shift + Space: switch the window between tiling and floating mode.
-- $mod + Space: switch focus between the floating and tiling window.
-- $mod + a: focus the parent window of the container.
+### Actions on windows & Layouts
 
-### Layouts
+| Key      | What it does                             |
+| -------- | ---------------------------------------- |
+| `$mod+q` | Kill focused window                      |
+| `$mod+t` | Toggle split orientation on stack layout |
+| `$mod+f` | Toggle fullscreen mode on focused window |
+| `$mod+s` | Set stacking layout                      |
+| `$mod+w` | Set tabbed layout                        |
 
-- $mod + f: toggles fullscreen mode and actual mode.
-- $mod + s: select stack layout.
-- $mod + w: select tabbed layout.
-- $mod + e: select split layout.
+### i3
 
-### Actions on I3
+| Key            | What it does                       |
+| -------------- | ---------------------------------- |
+| `$mod+Shift+c` | Reload configuration file of i3-wm |
+| `$mod+Shift+r` | Restart i3-wm                      |
+| `ctrl+Mod1+l`  | Lock screen (`Mod1` is `Alt` key)  |
 
-- $mod + Shift + c: reload the config file.
-- $mod + Shift + r: restart i3.
-- $mod + Shift + e: execute a command to confirm the exit and logout of i3 session.
-- $mod + Alt + l: block the screen.
+### Applications
 
-### Modes on I3
+| Key                                           | What it does                                                 |
+| --------------------------------------------- | ------------------------------------------------------------ |
+| `$mod+Return`                                 | Launch Kitty terminal                                        |
+| `$mod+Print`/`$mod+Mod1+s`                    | Take a screenshot and save it on `~/Images/Screenshots/`     |
+| `$mod+Shift+Print`/`$mod+Shift+s`             | Section to screenshot and save it on `~/Images/Screenshots/` |
+| `XF86AudioRaiseVolume`/`XF86AudioLowerVolume` | +/- 10% volume (uses `.scripts/volume_control.sh`)           |
+| `XF86AudioMute`                               | Mute volume (uses `.scripts/volume_control.sh`)              |
+| `XF86MonBrightnessUp`/`XF86MonBrightnessDown` | +/- 5% brightness (uses `.scripts/brightness_control.sh`)    |
 
-- $mod + r: resize. Here you can modify the sizes of the windows (if there are more
- than one in the workspace):
-  - j or Left: shrink width in 3px.
-  - k or Down: grow height in 3px.
-  - l or Up: shrink height in 3px.
-  - ñ or Right: grow width in 3px.
-- $mod + u: Volume mode. Here, we can control the volume of the system.
-  - u: volume up by 10%.
-  - d: volume down by 10%.
-  - m: volume mute.
-- $mod + y: Bright mode. With this mode, we can control the brightness of the screen.
-  - u: 5% more bright.
-  - d: 5% less bright.
-- $mod + i: Internauta mode. For applications to navigate.
-  - t: launch Thunderbird.
-  - f: launch Firefox.
-  - q: launch Qutebrowser.
-- $mod + o: explorer mode. For some applications that i frecuently use.
-  - k: launch Keepass.
-  - v: launch VLC.
-  - p: launch Pomotroid.
-- $mod + g: gaming mode. This one is for applications to play videogames.
-  - s: launch Steam.
-  - m: launch mGBA.
-- $mod + m: chat mode. For applications to chat with people.
-  - t: launch Telegram.
-  - d: launch Discord.
-- $mod + z: zystem mode. With this, you can logout, reboot or shutdown the system.
-  - s: shutdown.
-  - r: reboot.
-  - l: logout.
+## Modes
 
-### Mouse bindings
+Modes are triggered with the following keys:
 
-- $mod + right button: toggle between floating window and tiling window.
-- $mod + lef button: allows you to drag a window.
+| Key      | What it does                              |
+| -------- | ----------------------------------------- |
+| `$mod+v` | Volume mode (controls the volume)         |
+| `$mod+b` | Brightness mode (controls the brightness) |
+| `$mod+i` | Internet mode                             |
+| `$mod+o` | Office mode                               |
+| `$mod+u` | Utillities mode                           |
+| `$mod+m` | Messaging mode                            |
+| `$mod+g` | Gaming mode                               |
+| `$mod+r` | Resize mode                               |
 
-### Workspaces
+To get out of any mode, you just have to use the `Return` or `Esc` key.
 
-- $mod + 1 to 0: allows you to move between the 10 workspaces of I3.
-- $mod + Shift + 1 to 0: move the focused container to another workspace.
-- $mod + b: move between workspaces back and forth.
-- $mod + Shift + b: move the focused container between workspaces back and forth.
-- $mod + n: move to the next workspace.
-- $mod + p: move to the previous workspace.
-- $mod + Shift + n: move the focused window to the next workspace.
-- $mod + Shift + p: move the focused window to the previous workspace.
+### Volume mode
 
-## Some more features
+| Key | What it does     |
+| --- | ---------------- |
+| `u` | Raise volume 10% |
+| `d` | Low volume 10%   |
+| `m` | Mute volume      |
 
-Some applications were assigned to specific workspaces, here I leave you
- a list of them:
+### Brightness mode
 
-- Kitty terminal on workspace 1.
-- Qutebrowser and Firefox on workspace 2.
-- MuPDF and Comix windows on workspace 3.
-- Telegram and Discord on workspace 4.
-- Steam and mGBA on workspace 5.
-- [NetBeans IDE](https://netbeans.apache.org/) on workspace 6.
-- [MySQL Workbench](https://www.mysql.com/products/workbench/) on workspace 7.
-- [Geeqie](https://www.geeqie.org/) and Nitrogen on workspace 8.
-- VLC on workspace 9.
-- Connman, Keepass and Thunderbird on workspace 10.
+| Key | What it does        |
+| --- | ------------------- |
+| `u` | Raise brightness 5% |
+| `d` | Low brightness 5%   |
 
-## How to make changes?
+### Internet mode
 
-I split the config file in others files on the directory `conf.d`, where the
- names are self-explanatory. This was made for an easy maintenance. You can
- change it as you like.
+| Key | What it does                                    |
+| --- | ----------------------------------------------- |
+| `q` | Launch [Qutebrowser](https://qutebrowser.org/)  |
+| `v` | Launch [Vivaldi](https://vivaldi.com/download/) |
 
-The only thing that I keep on the config file are: an `include` which adds
- all the files in the `conf.d` directory; the variable of $mod, which the
- others files use it; and the execution of Polybar.
+### Office mode
 
-[1]: https://en.wikipedia.org/wiki/Tiling_window_manager
-[2]: https://i3wm.org/
-[3]: https://github.com/ryanoasis/nerd-fonts
-[4]: https://wiki.archlinux.org/title/ConnMan
-[5]: https://github.com/yshui/picom
-[6]: https://wiki.archlinux.org/title/nitrogen
-[7]: https://github.com/dylanaraps/pywal
-[9]: https://mpd.readthedocs.io/en/latest/
-[10]: https://man.archlinux.org/man/brightnessctl.1.en
-[11]: https://github.com/jonls/redshift
-[12]: https://sw.kovidgoyal.net/kitty/
-[13]: https://github.com/davatorium/rofi
-[14]: https://www.gnome-look.org/p/1305251/
-[15]: https://github.com/resurrecting-open-source-projects/scrot
-[16]: https://wiki.archlinux.org/title/PulseAudio
-[17]: https://www.mozilla.org/en-US/firefox/new/
-[18]: https://www.thunderbird.net/en-US/
-[19]: https://qutebrowser.org/
-[20]: https://keepass.info/
-[21]: https://www.videolan.org/
-[22]: https://github.com/Splode/pomotroid
-[23]: https://store.steampowered.com/about/
-[24]: https://mgba.io/
-[25]: https://desktop.telegram.org/
-[26]: https://discord.com/download
-[27]: https://github.com/polybar/polybar
-[28]: https://parcellite.sourceforge.net/
+| Key | What it does                                         |
+| --- | ---------------------------------------------------- |
+| `g` | Launch [Geogebra](https://www.geogebra.org/download) |
+| `l` | Launch [LibreOffice](https://www.libreoffice.org/)   |
+| `o` | Launch [Obsidian](https://obsidian.md/)              |
+| `i` | Launch [GIMP](https://www.gimp.org/downloads/)       |
+| `u` | Launch [UMLet](https://www.umlet.com/)               |
+
+### Utillities mode
+
+| Key | What it does                                            |
+| --- | ------------------------------------------------------- |
+| `k` | Launch [KeePassXC](https://keepassxc.org/)              |
+| `p` | Launch [Pomotroid](https://github.com/Splode/pomotroid) |
+| `t` | Launch [Thunar](https://github.com/neilbrown/thunar)    |
+| `c` | Launch [Calculator](https://apps.gnome.org/Calculator/) |
+| `b` | Launch [BleachBit](https://www.bleachbit.org/)          |
+
+### Messaging mode
+
+| Key | What it does                                                             |
+| --- | ------------------------------------------------------------------------ |
+| `t` | Launch [Telegram](https://desktop.telegram.org/)                         |
+| `h` | Launch [Thunderbird](https://www.thunderbird.net/en-US/thunderbird/all/) |
+
+### Gaming mode
+
+| Key | What it does                                        |
+| --- | --------------------------------------------------- |
+| `s` | Launch [Steam](https://store.steampowered.com/)     |
+| `m` | Launch [mGBA](https://mgba.io/)                     |
+| `c` | Launch [Citra](https://citra-emulator.com/)         |
+| `d` | Launch [DeSmuME](https://www.desmume.com/)          |
+| `p` | Launch [PPSSPP](https://www.ppsspp.org/)            |
+| `o` | Launch [Dolphin Emulator](https://dolphin-emu.org/) |
+
+### Resize mode
+
+| Key         | What it does          |
+| ----------- | --------------------- |
+| `h`/`Left`  | Shrink width for 3px  |
+| `l`/`Right` | Grow width for 3px    |
+| `k`/`Up`    | Shrink height for 3px |
+| `j`/`Down`  | Grow height for 3px   |
