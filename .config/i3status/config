@@ -26,6 +26,7 @@ battery all {
         format = "%status %percentage"
         low_threshold = 25
         threshold_type = "percentage"
+        last_full_capacity = true
         status_chr = "󰂋 "
         status_bat = "󰂂 "
         status_unk = "󱉝 "
