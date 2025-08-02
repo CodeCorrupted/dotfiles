@@ -12,12 +12,6 @@ POLYBAR_COLORS="$HOME/.config/polybar/colors.ini"
 BSPWM_AUTOSTART="$HOME/.config/bspwm/autostart.sh"
 ROFI_COLORS="$HOME/.config/rofi/colors/theme-pywal.rasi"
 
-# Helper function to restart polybar
-restart_polybar() {
-  pkill -USR1 polybar 2>/dev/null || true
-  polybar-msg cmd restart 2>/dev/null || true
-}
-
 # Function to replace values with sed
 # args: <file> <pattern> <replacement>
 update_config() {
@@ -96,12 +90,12 @@ update_colors() {
     # alacritty
     wal_alacritty.sh ~/.config/alacritty/colors.toml
     # rofi
-    update_config "$ROFI_COLORS" "^[[:space:]]*background[[:space:]]*= .*" "    background: ${BG};"
-    update_config "$ROFI_COLORS" "^[[:space:]]*background-alt[[:space:]]*= .*" "    background-alt: ${ACC3};"
-    update_config "$ROFI_COLORS" "^[[:space:]]*foreground[[:space:]]*= .*" "    foreground: ${FG};"
-    update_config "$ROFI_COLORS" "^[[:space:]]*selected[[:space:]]*= .*" "    selected: ${ACC1};"
-    update_config "$ROFI_COLORS" "^[[:space:]]*active[[:space:]]*= .*" "    active: ${ACC2};"
-    update_config "$ROFI_COLORS" "^[[:space:]]*urgent[[:space:]]*= .*" "    urgent: ${ALERT};"
+    update_config "$ROFI_COLORS" "^[[:space:]]*background[[:space:]]*: .*" "    background: ${BG};"
+    update_config "$ROFI_COLORS" "^[[:space:]]*background-alt[[:space:]]*: .*" "    background-alt: ${ACC1};"
+    update_config "$ROFI_COLORS" "^[[:space:]]*foreground[[:space:]]*: .*" "    foreground: ${FG};"
+    update_config "$ROFI_COLORS" "^[[:space:]]*selected[[:space:]]*: .*" "    selected: ${ACC2};"
+    update_config "$ROFI_COLORS" "^[[:space:]]*active[[:space:]]*: .*" "    active: ${ACC1};"
+    update_config "$ROFI_COLORS" "^[[:space:]]*urgent[[:space:]]*: .*" "    urgent: ${ALERT};"
     # polybar
     update_config "$POLYBAR_COLORS" '^bg-modules = .*' "bg-modules = ${BG}"
     update_config "$POLYBAR_COLORS" '^fg = .*' "fg = ${FG}"
@@ -116,7 +110,7 @@ update_colors() {
     update_config "$POLYBAR_COLORS" '^date = .*' "date = ${ACC4}"
     update_config "$POLYBAR_COLORS" '^battery = .*' "battery = ${RED}"
     # restart polybar
-    restart_polybar
+    polybar-msg cmd restart &>/dev/null
     # dunst
     update_config "$DUNST_CONF_BSPWM" "^[[:space:]]*background[[:space:]]*= .*" "    background = \"${BG}\""
     update_config "$DUNST_CONF_BSPWM" "^[[:space:]]*foreground[[:space:]]*= .*" "    foreground = \"${FG}\""

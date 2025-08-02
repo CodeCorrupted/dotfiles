@@ -17,6 +17,7 @@ CFG="${1:-${HOME}/.config/alacritty/alacritty.toml}"
 CFG=$(readlink -f "$CFG")
 
 # load wal colours
+FZF_DEFAULT_OPTS="${FZF_DEFAULT_OPTS:-}"
 # shellcheck disable=SC1090
 source "$SRC"
 

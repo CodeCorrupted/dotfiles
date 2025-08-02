@@ -6,7 +6,13 @@ mapfile -t dirs < <(printf '%s\n' "$BL_DIR"/*)
 [[ ${#dirs[@]} -eq 0 ]] && exit 1
 
 dev=${dirs[0]}
-get() { printf '%d%%' "$(<"$dev/brightness")"; }
+
+get() {
+  local cur max
+  cur=$(<"$dev/brightness")
+  max=$(<"$dev/max_brightness")
+  printf '%d%%' "$((cur * 100 / max))"
+}
 
 # initial
 get >"$OUTFILE"

@@ -14,7 +14,7 @@ no="  No"
 menu="${lock}\n${logout}\n${reboot}\n${shutdown}"
 
 dmenu_cmd() {
-  dmenu -i -l 4 -p "Power Menu: " -fn 'Hurmit Nerd Font' -nb '#1c1823' -nf '#dacecd' -sb '#3662CD' -sf '#dacecd'
+  dmenu -i -l 4 -p "Power Menu: " -fn 'Hurmit Nerd Font' -nb '#182534' -nf '#cddce6' -sb '#43B4D9' -sf '#cddce6'
 }
 
 confirm() {
