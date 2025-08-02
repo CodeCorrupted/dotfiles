@@ -60,7 +60,7 @@ sudo pacman -S --needed \
   fd chafa ffmpegthumbnailer poppler
 
 # Copy this folder to config directory
-cp -r dotfiles/nvim ~/.config/
+cp -r dotfiles/.config/nvim ~/.config/
 
 # Start Neovim to bootstrap plugin manager
 nvim

@@ -18,7 +18,7 @@ Clone this repo, and then:
 sudo pacman -S --needed kitty
 
 # Copy
-cp -r dotfiles/kitty/ ~/.config
+cp -r dotfiles/.config/kitty/ ~/.config
 ```
 
 ## Customize

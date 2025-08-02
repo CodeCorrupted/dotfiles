@@ -19,8 +19,8 @@ sudo pacman -S --needed mpd ncmpcpp
 
 # Copy
 mkdir -p ~/.config/ncmpcpp/
-cp dotfiles/mpdnotify.conf ~/.config/
-cp dotfiles/ncmpcpp/config ~/.config/ncmpcpp
+cp dotfiles/.config/mpdnotify.conf ~/.config/
+cp dotfiles/.config/ncmpcpp/config ~/.config/ncmpcpp
 ```
 
 Reload `mpd` and launch `ncmpcpp`.

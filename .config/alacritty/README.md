@@ -19,7 +19,7 @@ First, you need to install [Terminess Nerd Font][1]. Then, clone this repo and:
 
 ```sh
 mkdir -p ~/.config/alacritty/
-cp dotfiles/alacritty/*.toml ~/.config/alacritty/
+cp dotfiles/.config/alacritty/*.toml ~/.config/alacritty/
 ```
 
 If you already use `pywal`, run the script `wal_alacritty.sh`, which will change

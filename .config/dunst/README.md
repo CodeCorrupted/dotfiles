@@ -23,7 +23,7 @@ sudo pacman -S dunst
 
 # Copy this configuration
 mkdir -p ~/.config/dunst/
-cp dotfiles/dunst/* ~/.config/dunst/
+cp dotfiles/.config/dunst/* ~/.config/dunst/
 
 # Reload/start Dunst
 pkill dunst && dunst &

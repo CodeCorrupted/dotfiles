@@ -20,7 +20,7 @@ Then clone this repo and run:
 sudo pacman -S --needed rofi
 
 # Copy configuration
-cp -r dofiles/rofi ~/.config
+cp -r dofiles/.config/rofi ~/.config
 ```
 
 ## Customize

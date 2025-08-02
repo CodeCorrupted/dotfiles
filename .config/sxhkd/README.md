@@ -9,6 +9,10 @@ To get all the keyboard shortcuts working at start, just run:
 ```sh
 sudo pacman -S --needed \
   bspwm sxhkd alacritty rofi vivaldi qutebrowser scrot
+
+# Copy
+mkdir -p ~/.config/sxhkd
+cp dotfiles/.config/sxhkd/sxhkdrc ~/.config/sxhkd/
 ```
 
 You also need the scripts (under the `~/.scripts/` directory):

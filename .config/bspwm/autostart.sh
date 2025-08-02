@@ -12,7 +12,7 @@ setxkbmap latam,us
 setxkbmap -option 'grp:alt_shift_toggle'
 
 # Set the wallpapper for bspwm
-xwallpaper --zoom "$HOME/Images/Wallpapers/2256.jpg"
+xwallpaper --zoom '/home/arc/Images/Wallpapers/2256.jpg'
 
 # Run polybar
 run ~/.config/polybar/launch.sh

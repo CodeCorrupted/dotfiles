@@ -17,7 +17,7 @@ sudo pacman -S --needed picom
 
 # Copy this config
 mkdir -p ~/.config/picom
-cp dotfiles/picom/picom.conf ~/.config/picom/
+cp dotfiles/.config/picom/picom.conf ~/.config/picom/
 
 # Launch picom
 picom -b

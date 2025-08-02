@@ -17,6 +17,9 @@ First, make sure you have:
 sudo pacman -S --needed \
   mpd polybar pulseaudio alacritty betterlockscreen xbacklight rofi
   pavucontrol bspwm
+
+# Copy
+cp dotfiles/.config/polybar ~/.config
 ```
 
 You also need the following scripts under `~/.scripts` directory:

@@ -29,7 +29,7 @@ Then, you have to clone this repository and do:
 
 ```sh
 mkdir -p ~/.config/bspwm/
-cp dotfiles/bspwm/*.sh dotfiles/bspwm/bspwmrc ~/.config/bspwm/
+cp dotfiles/.config/bspwm/*.sh dotfiles/bspwm/bspwmrc ~/.config/bspwm/
 ```
 
 And edit the line 15 to set your wallpapper and run `betterlockscreen` to set

@@ -12,7 +12,7 @@ sudo pacman -S --needed mpd
 
 # Copy the configuration
 mkdir -p ~/.config/mpd
-cp dotfiles/mpd/mpd.conf ~/.config/mpd/
+cp dotfiles/.config/mpd/mpd.conf ~/.config/mpd/
 
 # Reload or initialize mpd
 systemctl start mpd

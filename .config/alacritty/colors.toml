@@ -23,6 +23,16 @@
 # BEGIN WAL
 # END WAL
 # BEGIN WAL
+# END WAL
+# BEGIN WAL
+# END WAL
+# BEGIN WAL
+# END WAL
+# BEGIN WAL
+# END WAL
+# BEGIN WAL
+# END WAL
+# BEGIN WAL
 [colors.primary]
 background = '#00000D'
 foreground = '#91e1d1'

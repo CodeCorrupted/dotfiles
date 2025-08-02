@@ -15,7 +15,7 @@ Then clone this repo and run:
 
 ```sh
 mkdir -p ~/.config/redshift/
-cp dotfiles/redshift/redshift.conf ~/.config/redshift/
+cp dotfiles/.config/redshift/redshift.conf ~/.config/redshift/
 ```
 
 Then you have to edit the lines 52 and 53 to set your location.
