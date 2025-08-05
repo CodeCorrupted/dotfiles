@@ -15,7 +15,7 @@ First, make sure you have:
 ```sh
 # Install
 sudo pacman -S --needed \
-  mpd polybar pulseaudio alacritty betterlockscreen xbacklight rofi
+  mpd polybar pulseaudio alacritty betterlockscreen xbacklight rofi \
   pavucontrol bspwm
 
 # Copy

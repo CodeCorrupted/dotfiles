@@ -14,9 +14,10 @@ chmod +x ~/.scripts/*.sh ~/.scripts/*.py
 
 # install dependencies
 sudo pacman -S --needed \
-  polybar i3-wm i3lock bspwm dunst acpi inotify-tools xbacklight pamixer
-  wmctrl xorg-xprop mpc python dmenu rofi betterlockscreen feh xwallpapper
-  python-pywal
+  polybar i3-wm i3lock bspwm dunst acpi inotify-tools xbacklight pamixer \
+  wmctrl xorg-xprop mpc python dmenu rofi feh xwallpapper python-pywal
+
+yay -S betterlockscreen
 ```
 
 If something isn't working propperly, check that every file is executable. Also,

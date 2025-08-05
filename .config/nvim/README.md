@@ -56,7 +56,7 @@ Make sure you have the following mandatory dependencies:
 ```bash
 # Install every dependency (fonts not included, only Arch based systems)
 sudo pacman -S --needed \
-  neovim git nodejs python tar curl unzip gzip npm typescript ripgrep
+  neovim git nodejs python tar curl unzip gzip npm typescript ripgrep \
   fd chafa ffmpegthumbnailer poppler
 
 # Copy this folder to config directory

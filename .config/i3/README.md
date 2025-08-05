@@ -27,7 +27,7 @@ Just run the following script on your terminal:
 
 ```sh
 sudo pacman -S --needed \
-  xorg-xsetxkbmap picom connman-gtk redshift udiskie dunst mpd blueman-applet
+  xorg-xsetxkbmap picom connman-gtk redshift udiskie dunst mpd blueman-applet \
   xautolock feh
 ```
 
@@ -45,8 +45,8 @@ relationated to them:
 
 ```sh
 sudo pacman -S --needed \
-  kitty dmenu scrot vivaldi qutebrowser libreoffice-fresh geogebra obsidian
-  gimp keepassxc thunar gnome-calculator bleachbit telegram-desktop thunderbird
+  kitty dmenu scrot vivaldi qutebrowser libreoffice-fresh geogebra obsidian \
+  gimp keepassxc thunar gnome-calculator bleachbit telegram-desktop thunderbird \
   steam mgba-qt desmume ppsspp dolphin-emu
 
 # Install from AUR

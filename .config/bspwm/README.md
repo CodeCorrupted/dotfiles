@@ -9,7 +9,7 @@ Install required dependencies, which are executed at start:
 
 ```sh
 sudo pacman -S --needed \
-  xwallpapper picom connman-gtk polybar redshift udiskie dunst
+  xwallpapper picom connman-gtk polybar redshift udiskie dunst \
   mpd blueman-applet xautolock wmname sxhkd xorg-apps connman-openrc
 
 yay -S betterlockscreen
